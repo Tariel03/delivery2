@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:text="${distributor.getName()}"></div>
+
+<div th:each="good:${goods}">
+        <p th:text="${good.getType() + ', '+good.getDescription() +', ' + good.getPrice()}"></p>
+        <form action="#" th:action="@{/api/v1/goods/zakaz/{goods_id}/{zakaz_id}(goods_id=${good.getId()}, zakaz_id = ${zakaz.getId()})}" method="POST">
+        <button type="submit">Add to Zakaz</button>
+    </form>
+    </a>
+</div>
+
+    <h1 th:text = "${zakaz.getDeliveryPrice() + ', '+ zakaz.getQuantity() +', ' +  zakaz.getTotalPrice()}">
+
+    </h1>
+
+<div th:each="good : ${zakaz.getGoods()}">
+    <p th:text="${good.getQuantity()+ ', '+ good.getPrice() + good.getType()}">
+    <form th:action="@{/api/v1/goods/add/{id} (id = ${good.getId()})}" method="post">
+        <button type="submit">+1</button>
+    </form>
+
+    <form th:action="@{/api/v1/goods/minus/{id} (id = ${good.getId()})}" method="post">
+        <button type="submit">-1</button>
+    </form>
+    </p>
+</div>
+
+</div>
+</body>
+</html>

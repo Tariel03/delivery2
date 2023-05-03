@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:text="${client.getId() + ', '+client.getName()+', '+client.getNumber() + ', '+client.getUsername()}">
+
+</div>
+
+<form th:action="@{/api/v1/authenticated/client/edit/{client_id}(client_id=${client.getId()})}" method="POST">
+    <label for="username1">Username:</label>
+    <input type="text" id="username1" th:placeholder="${client.getUsername()}" name="username">
+    <br>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="name" th:placeholder="${client.getName()}" >
+    <label for="number">Number:</label>
+    <input type="text" id="number" name="number" th:placeholder="${client.getNumber()}" >
+
+    <button type="submit">Edit Client</button>
+</form>
+
+
+</body>
+</html>
