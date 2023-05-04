@@ -22,10 +22,8 @@ public class AuthController {
     PasswordEncoder passwordEncoder;
     @GetMapping("/login")
     public String login(){
-
         return "login";
     }
-
     @PostMapping("/signUp")
    public String signUp(@RequestParam String username, String password, String name,String number){
        Client client = new Client();

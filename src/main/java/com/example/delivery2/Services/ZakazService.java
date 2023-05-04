@@ -14,6 +14,8 @@ public interface ZakazService {
     Zakaz save(Zakaz zakaz);
     List<Zakaz>findByClient(Client client);
     List<Zakaz>findByZakazStatus(ZakazStatus zakazStatus);
+    List<Zakaz>findByClientAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus);
+
 
 
 }

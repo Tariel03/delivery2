@@ -16,6 +16,8 @@ public class Distributor {
     Long id;
     String name;
     String address;
+    int quantity;
+    int point;
     String photo;
 
     public Long getId() {

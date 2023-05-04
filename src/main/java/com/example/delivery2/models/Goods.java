@@ -18,14 +18,11 @@ public class Goods {
     Distributor distributor;
     String type;
     String name;
-    @Column(columnDefinition = "integer default 1")
-    int quantity;
+
     @Column(columnDefinition = "text")
     String description;
     int price;
-    @ManyToOne
-    @JoinColumn(name = "zakaz_id")
-    Zakaz zakaz;
+
 
     public Goods(String type, String description, int price) {
         this.type = type;

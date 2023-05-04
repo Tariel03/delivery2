@@ -8,9 +8,10 @@
 <h1>BIN!</h1>
 <h4>Orders</h4>
 <div th:each="zakaz:${zakazList}">
-    <p th:text="${zakaz.getDeliveryPrice() +' delivery price'}"></p>
-    <div th:each="good:${zakaz.getGoods()}">
-        <p th:text="${good.getPrice()}">
+    <h4 th:text="${'Delivery price is ' + zakaz.getTotalPrice()+', Quantity is ' + zakaz.getQuantity() + ' and Status is ' + zakaz.getZakazStatus()}"></h4>
+    <form action="#" th:action="@{/api/v1/authenticated/zakaz/dead/{id}(id=${zakaz.getId()})}" method="POST">
+        <button type="submit">Decline!</button>
+    </form>
 
         </p>
     </div>

@@ -2,6 +2,7 @@ package com.example.delivery2.models;
 
 import javax.persistence.*;
 
+import com.example.delivery2.Enums.Payment;
 import com.example.delivery2.Enums.ZakazStatus;
 import lombok.*;
 
@@ -27,10 +28,12 @@ public class Zakaz {
     @ManyToOne
     @JoinColumn(name = "client_id")
     Client client;
-    @OneToMany(mappedBy = "zakaz", cascade = CascadeType.ALL)
-   List<Goods> goods= new ArrayList<>();
+   @ManyToOne
+   @JoinColumn(name = "zakazGood_id")
+   ZakazGood zakazGood;
     String address;
-    String description;
+    @Enumerated(EnumType.STRING)
+    Payment payment;
 
     @Override
     public String toString() {

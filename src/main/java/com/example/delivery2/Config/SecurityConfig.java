@@ -1,5 +1,6 @@
 package com.example.delivery2.Config;
 
+import com.example.delivery2.Enums.Roles;
 import com.example.delivery2.Security.ClientDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(clientDetailsService)
                 .passwordEncoder(getPasswordEncoder());
     }
-
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {

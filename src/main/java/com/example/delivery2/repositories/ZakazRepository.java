@@ -11,8 +11,8 @@ import java.util.List;
 
 @Repository
 public interface ZakazRepository extends JpaRepository<Zakaz, Long> {
-    List<Zakaz> findByGoods(Goods goods);
     List<Zakaz>findByClient(Client client);
     List<Zakaz>findByZakazStatus(ZakazStatus zakazStatus);
+    List<Zakaz>findByClientAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus);
 
 }

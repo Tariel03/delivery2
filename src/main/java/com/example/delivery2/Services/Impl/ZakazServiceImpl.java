@@ -24,7 +24,7 @@ public class ZakazServiceImpl implements ZakazService {
 
     @Override
     public List<Zakaz> findByGoods(Goods goods) {
-        return zakazRepository.findByGoods(goods);
+        return null;
     }
 
     @Override
@@ -35,16 +35,10 @@ public class ZakazServiceImpl implements ZakazService {
         }
         return optionalZakaz.get();
     }
+
     @Override
     public Zakaz save(Zakaz zakaz) {
-        AtomicInteger total = new AtomicInteger();
-
-        zakaz.getGoods().forEach(goods -> {
-            total.addAndGet(goods.getPrice()* goods.getQuantity());
-        });
-        zakaz.setTotalPrice(total.get()+65);
         zakaz.setDeliveryPrice(65);
-        zakaz.setQuantity(zakaz.getGoods().size());
         return zakazRepository.save(zakaz);
     }
 
@@ -56,5 +50,10 @@ public class ZakazServiceImpl implements ZakazService {
     @Override
     public List<Zakaz> findByZakazStatus(ZakazStatus zakazStatus) {
         return zakazRepository.findByZakazStatus(zakazStatus);
+    }
+
+    @Override
+    public List<Zakaz> findByClientAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus) {
+        return zakazRepository.findByClientAndZakazStatusNotLike(client,zakazStatus);
     }
 }
