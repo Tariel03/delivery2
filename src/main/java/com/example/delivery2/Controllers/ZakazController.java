@@ -45,7 +45,6 @@ public class ZakazController {
         zakazGoods.forEach(zakazGood -> {
             zakazGood.setZakaz(zakaz);
         });
-
         for (ZakazGood z : zakazGoods
         ) {
             zakazGoodService.save(z);

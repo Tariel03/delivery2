@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(clientDetailsService)
                 .passwordEncoder(getPasswordEncoder());
     }
+    //Шифруем наш пароль
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {

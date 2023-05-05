@@ -50,23 +50,15 @@ public class GoodsController {
         zakazGoodService.save(zakazGood);
         return "redirect:/api/v1/distributor/1";
     }
-
-//    @PostMapping("goods/add/{id}")
-//    public String goodsAdd(@PathVariable Long id) throws Exception {
-//        Goods goods = goodsService.findById(id);
-//        goods.setQuantity(goods.getQuantity()+1);
-//        goodsService.save(goods);
-//        zakazService.save(zakazService.findById(205L));
-//        return "redirect:/api/v1/distributor/1";
-//    }
-//    @PostMapping("goods/minus/{id}")
-//    public String goodsMinus(@PathVariable Long id) throws Exception {
-//        Goods goods = goodsService.findById(id);
-//        goods.setQuantity(goods.getQuantity()-1);
-//        zakazService.save(zakazService.findById(205L));
-//        goodsService.save(goods);
-//        return "redirect:/api/v1/distributor/1";
-//    }
+    @PostMapping("/admin/goods/create/{distributor_id}")
+    public String createGoods(@PathVariable Long distributor_id, @RequestParam int price, @RequestParam String name){
+        Goods goods = new Goods();
+        goods.setPrice(price);
+        goods.setName(name);
+        goods.setDistributor(distributorService.findById(distributor_id));
+        goodsService.save(goods);
+        return "redirect:/api/v1/admin";
+    }
 
 
 

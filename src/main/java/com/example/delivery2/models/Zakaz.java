@@ -28,6 +28,9 @@ public class Zakaz {
     @ManyToOne
     @JoinColumn(name = "client_id")
     Client client;
+    @ManyToOne
+    @JoinColumn(name = "deliver_id")
+    Client client1;
    @ManyToOne
    @JoinColumn(name = "zakazGood_id")
    ZakazGood zakazGood;

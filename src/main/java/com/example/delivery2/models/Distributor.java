@@ -4,6 +4,11 @@ import javax.persistence.*;
 ;
 import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @ToString
 @Getter
@@ -17,9 +22,16 @@ public class Distributor {
     String name;
     String address;
     int quantity;
-    int point;
     String photo;
 
+    public Distributor(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    @ElementCollection(targetClass = Integer.class)
+    @Column(name = "point")
+    List<Integer> point = new ArrayList<>();
     public Long getId() {
         return id;
     }

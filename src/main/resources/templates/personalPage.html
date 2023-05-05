@@ -22,6 +22,19 @@
     <button type="submit">Edit Client</button>
 </form>
 
+<div th:each="request:${requests}">
+    <h2 th:text="${request.getRequestStatus()}">
+
+    </h2>
+</div>
+
+<form th:action="@{/api/v1/authenticated/client/request/{client_id}(client_id=${client.getId()})}" method="POST">
+    <button type="submit">Request!</button>
+</form>
+
+
+
+
 
 </body>
 </html>

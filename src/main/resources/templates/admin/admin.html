@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:each="request:${requests}">
+    <p th:text="${request.getClient().getName() + ', '+ request.getRequestStatus() + ', '+request.getLocalDate() + request.getLocalTime()}"></p>
+
+    <form th:action="@{/api/v1/admin/request/approve/{id}(id=${request.getId()})}" method="POST">
+        <button type="submit">Approve!</button>
+    </form>
+    <br>
+    <form th:action="@{/api/v1/admin/request/decline/{id}(id=${request.getId()})}" method="POST">
+        <button type="submit">Decline!</button>
+    </form>
+
+</div>
+
+
+
+
+<form th:action="@{/api/v1/admin/distributor/create}" method="POST">
+    <label for="firstName">Name:</label>
+    <input type="text" id="firstName" name="name" >
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address">
+    <button type="submit">Create distributor</button>
+</form>
+<br><br>
+
+<div th:each="distributor:${distributors}">
+    <div th:text="${distributor.getName() + ', ' + distributor.getAddress()}">
+    </div>
+
+
+    <br><br>
+    <div th:each="good :${goodsService.findByDistributor(distributor)}">
+        <div th:text= "${good.getName() + ', '+ good.getPrice() + '$'}">
+        </div>
+    </div>
+    <br>
+
+        <form th:action="@{/api/v1/admin/goods/create/{distributor_id} (distributor_id = ${distributor.getId()})}" method="POST">
+            <label for="firstName1">Name:</label>
+            <input type="text" id="firstName1" name="name" >
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price">
+            <button type="submit">Create goods</button>
+        </form>
+
+</div>
+
+
+
+
+
+</body>
+</html>

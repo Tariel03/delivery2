@@ -6,9 +6,13 @@
 </head>
 <body>
 <div th:text="${distributor.getName()}"></div>
+<div th:text = "${goods == null}">
+    Nothing here yet!
+</div>
+
 
 <div th:each="good:${goods}">
-        <p th:text="${good.getType() + ', '+good.getDescription() +', ' + good.getPrice()}"></p>
+        <p th:text="${good.getName()  +', ' + good.getPrice()}"></p>
         <form action="#" th:action="@{/api/v1/goods/zakaz/{goods_id}(goods_id=${good.getId()})}" method="POST">
         <button type="submit">Add to Zakaz</button>
     </form>
@@ -21,7 +25,7 @@
 
 
 <h2>Reviews</h2>
-<div th:text = "${distributor.getPoint() + '*****'}"></div>
+<div th:text = "${total + '*****'}"></div>
 <div th:text = "${distributor.getQuantity() + ' times we were reviewed'}"></div>
 <h2>TO review</h2>
 

@@ -25,14 +25,14 @@ public class AuthController {
         return "login";
     }
     @PostMapping("/signUp")
-   public String signUp(@RequestParam String username, String password, String name,String number){
+   public String signUp(@RequestParam String username, @RequestParam String password, @RequestParam String name,@RequestParam String number){
        Client client = new Client();
        client.setUsername(username);
        client.setName(name);
        client.setNumber(number);
        client.setPassword(password);
         registrationService.save(client);
-        return "redirect:/api/v1/distributor/all";
+        return "redirect:/auth/login";
     }
 
 

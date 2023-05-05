@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 @AllArgsConstructor
@@ -32,11 +33,17 @@ public class DistributorController {
     }
     @GetMapping("/distributor/{id}")
     public String distributorById(Model model,@PathVariable Long id) throws Exception {
-        model.addAttribute("distributor",distributorService.findById(id));
+        Distributor distributor =distributorService.findById(id);
+        AtomicInteger total = new AtomicInteger();
+        distributor.getPoint().forEach(total::addAndGet);
+
+        model.addAttribute("total",total.get() > 0 ? total.get()/distributor.getQuantity():1);
+        model.addAttribute("distributor",distributor);
         model.addAttribute("goods", goodsService.findByDistributor(distributorService.findById(id)));
         model.addAttribute("zakazGoods",zakazGoodService.findByZakaz(null));
         System.out.println(distributorService.findById(id));
         model.addAttribute("payments",Payment.values());
+
 //        model.addAttribute("zakaz",zakazService.findById(205L));
 //        System.out.println(zakazService.findById(205L));
         return "distributorById";
@@ -44,10 +51,17 @@ public class DistributorController {
     @PostMapping("/distributor/review/{id}")
     public String reviewDistributor(@PathVariable Long id, @RequestParam int review){
         Distributor distributor = distributorService.findById(id);
-        distributor.setPoint(review);
-        distributor.setQuantity(distributor.getQuantity()+1);
+        distributor.getPoint().add(review);
+        distributor.setQuantity(distributor.getPoint().size());
         distributorService.save(distributor);
         return "redirect:/api/v1/distributor/"+distributor.getId();
+    }
+    @PostMapping("/admin/distributor/create")
+    public String createDistributor(@RequestParam String name, @RequestParam String address){
+        Distributor distributor = new Distributor(name, address);
+        distributorService.save(distributor);
+        distributorService.save(distributor);
+        return "redirect:/api/v1/admin";
     }
 
 

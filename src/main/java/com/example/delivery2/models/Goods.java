@@ -18,7 +18,6 @@ public class Goods {
     Distributor distributor;
     String type;
     String name;
-
     @Column(columnDefinition = "text")
     String description;
     int price;
