@@ -28,7 +28,6 @@ public class Distributor {
         this.name = name;
         this.address = address;
     }
-
     @ElementCollection(targetClass = Integer.class)
     @Column(name = "point")
     List<Integer> point = new ArrayList<>();

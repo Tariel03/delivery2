@@ -59,6 +59,13 @@ public class GoodsController {
         goodsService.save(goods);
         return "redirect:/api/v1/admin";
     }
+    @PostMapping("/goods/search")
+    public String search(Model model, @RequestParam String name){
+        List<Goods> goodsList = goodsService.searchByNameLike(name);
+        model.addAttribute("goodsList",goodsList);
+        return "searchDistributor";
+
+    }
 
 
 

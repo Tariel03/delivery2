@@ -49,4 +49,5 @@ public class AdminController {
         requestService.save(request);
         return "redirect:/api/v1/admin";
     }
+    
 }

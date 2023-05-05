@@ -11,6 +11,8 @@ public interface GoodsService {
     List<Goods> findByDistributor(Distributor distributor);
     Goods save(Goods goods);
     List<Goods> findAll();
+    List<Goods>searchByNameLike(String a);
+
     List<Goods>findByDistributorAndType(Distributor distributor, String type);
 
 

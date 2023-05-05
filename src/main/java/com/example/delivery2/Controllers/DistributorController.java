@@ -6,6 +6,7 @@ import com.example.delivery2.Services.Impl.GoodsServiceImpl;
 import com.example.delivery2.Services.Impl.ZakazGoodServiceImpl;
 import com.example.delivery2.Services.Impl.ZakazServiceImpl;
 import com.example.delivery2.models.Distributor;
+import com.example.delivery2.models.Goods;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,16 +37,12 @@ public class DistributorController {
         Distributor distributor =distributorService.findById(id);
         AtomicInteger total = new AtomicInteger();
         distributor.getPoint().forEach(total::addAndGet);
-
         model.addAttribute("total",total.get() > 0 ? total.get()/distributor.getQuantity():1);
         model.addAttribute("distributor",distributor);
         model.addAttribute("goods", goodsService.findByDistributor(distributorService.findById(id)));
         model.addAttribute("zakazGoods",zakazGoodService.findByZakaz(null));
         System.out.println(distributorService.findById(id));
         model.addAttribute("payments",Payment.values());
-
-//        model.addAttribute("zakaz",zakazService.findById(205L));
-//        System.out.println(zakazService.findById(205L));
         return "distributorById";
     }
     @PostMapping("/distributor/review/{id}")
@@ -63,6 +60,8 @@ public class DistributorController {
         distributorService.save(distributor);
         return "redirect:/api/v1/admin";
     }
+
+
 
 
 }
