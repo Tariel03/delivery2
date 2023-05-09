@@ -47,6 +47,11 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public List<Goods> searchByNameLikeAndDistributor(String name, Distributor distributor) {
+        return goodsRepository.searchByNameLikeAndDistributor(name, distributor);
+    }
+
+    @Override
     public List<Goods> searchByNameLike(String a) {
         return goodsRepository.searchByNameLike(a+"%");
     }

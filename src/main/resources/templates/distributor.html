@@ -11,7 +11,7 @@
 
     <a th:href="@{/api/v1/distributor/{id} (id = ${distributor.getId()})}">
         <p th:text="${distributor.getName() + ', '+distributor.getAddress()}"></p>
-        <img th:src="@{/{image}(image=${distributor.getPhoto()})}" alt="boo nigga" height="50%" width="50%">
+        <img th:src="@{/static/KFC_logo.svg.png}" alt="boo nigga" height="50%" width="50%">
     </a>
 </div>
 

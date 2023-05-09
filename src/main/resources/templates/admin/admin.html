@@ -53,6 +53,18 @@
 
 </div>
 
+<h3>Statistics</h3>
+
+<div th:text="${'Number of delivers is  ' + deliver_number}">
+</div>
+<br>
+<div th:each="deliver:${delivers}">
+    <div th:text="${'Name is ' + deliver.getName() + ', username ' + deliver.getUsername() + ',number ' + deliver.getNumber()}">
+    </div>
+    <br>
+    <div th:text="'This deliver has delievered '+ ${number_zakaz} + ' of orders' + '. And his salary is '+ ${salary} + '$'"></div>
+</div>
+
 
 
 

@@ -12,15 +12,11 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ZakazGood {
+public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     Long id;
-    @ManyToOne
-    @JoinColumn(name = "goods_id")
-    Goods goods;
-    int quantity;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "zakaz_id")
-    Zakaz zakaz;
+    @Column(columnDefinition = "TEXT")
+    String text;
+
 }

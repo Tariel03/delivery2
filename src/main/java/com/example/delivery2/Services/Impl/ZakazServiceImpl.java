@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @AllArgsConstructor
@@ -38,7 +37,6 @@ public class ZakazServiceImpl implements ZakazService {
 
     @Override
     public Zakaz save(Zakaz zakaz) {
-        zakaz.setDeliveryPrice(65);
         return zakazRepository.save(zakaz);
     }
 
@@ -50,6 +48,29 @@ public class ZakazServiceImpl implements ZakazService {
     @Override
     public List<Zakaz> findByZakazStatus(ZakazStatus zakazStatus) {
         return zakazRepository.findByZakazStatus(zakazStatus);
+    }
+
+    @Override
+    public List<Zakaz> findByZakazStatusAndDeliver(ZakazStatus zakazStatus, Client deliver) {
+        return zakazRepository.findByZakazStatusAndDeliver(zakazStatus,deliver);
+    }
+
+    @Override
+    public Double countSalary(Long deliver_id) {
+        if(zakazRepository.countSalary(deliver_id) == null){
+            return (double) 0;
+        }
+        return zakazRepository.countSalary(deliver_id) * 0.4;
+    }
+
+    @Override
+    public List<Zakaz> findByDeliver(Client deliver) {
+        return zakazRepository.findByDeliver(deliver);
+    }
+
+    @Override
+    public long countByDeliver(Client deliver) {
+        return  zakazRepository.countByDeliver(deliver);
     }
 
     @Override

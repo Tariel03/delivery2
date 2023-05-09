@@ -1,5 +1,6 @@
 package com.example.delivery2.Services.Impl;
 
+import com.example.delivery2.Enums.Roles;
 import com.example.delivery2.Exceptions.MainException;
 import com.example.delivery2.Services.ClientService;
 import com.example.delivery2.dto.UpdateUserDto;
@@ -65,7 +66,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client edit(UpdateUserDto userDto,Client client) {
+    public void edit(UpdateUserDto userDto, Client client) {
         if (!userDto.getName().isEmpty() && userDto.getName().length() >= 2) {
             client.setName(userDto.getName());
         }
@@ -76,12 +77,22 @@ public class ClientServiceImpl implements ClientService {
         if (!userDto.getNumber().isEmpty() && userDto.getNumber().length() >= 2) {
             client.setNumber(userDto.getNumber());
         }
-        return clientRepository.save(client);
+        clientRepository.save(client);
     }
 
     @Override
     public UpdateUserDto toUpdateDto(Client client) {
         return modelMapper.map(client, UpdateUserDto.class);
+    }
+
+    @Override
+    public List<Client> findByRoles(Roles roles) {
+        return clientRepository.findByRoles(roles);
+    }
+
+    @Override
+    public Double countByRoles(Roles roles) {
+        return clientRepository.countByRoles(roles);
     }
 
 

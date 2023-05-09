@@ -30,7 +30,7 @@ public class Zakaz {
     Client client;
     @ManyToOne
     @JoinColumn(name = "deliver_id")
-    Client client1;
+    Client deliver;
    @ManyToOne
    @JoinColumn(name = "zakazGood_id")
    ZakazGood zakazGood;

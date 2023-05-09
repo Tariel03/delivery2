@@ -5,6 +5,7 @@ import com.example.delivery2.Services.Impl.DistributorServiceImpl;
 import com.example.delivery2.Services.Impl.GoodsServiceImpl;
 import com.example.delivery2.Services.Impl.ZakazGoodServiceImpl;
 import com.example.delivery2.Services.Impl.ZakazServiceImpl;
+import com.example.delivery2.dto.ZakazDto;
 import com.example.delivery2.models.Distributor;
 import com.example.delivery2.models.Goods;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class DistributorController {
         return "distributor";
     }
     @GetMapping("/distributor/{id}")
-    public String distributorById(Model model,@PathVariable Long id) throws Exception {
+    public String distributorById(Model model,@PathVariable Long id) {
         Distributor distributor =distributorService.findById(id);
         AtomicInteger total = new AtomicInteger();
         distributor.getPoint().forEach(total::addAndGet);
@@ -41,22 +42,22 @@ public class DistributorController {
         model.addAttribute("distributor",distributor);
         model.addAttribute("goods", goodsService.findByDistributor(distributorService.findById(id)));
         model.addAttribute("zakazGoods",zakazGoodService.findByZakaz(null));
-        System.out.println(distributorService.findById(id));
         model.addAttribute("payments",Payment.values());
         return "distributorById";
     }
     @PostMapping("/distributor/review/{id}")
     public String reviewDistributor(@PathVariable Long id, @RequestParam int review){
         Distributor distributor = distributorService.findById(id);
-        distributor.getPoint().add(review);
-        distributor.setQuantity(distributor.getPoint().size());
-        distributorService.save(distributor);
+        if(review >= 0 && review <= 10 ){
+            distributor.getPoint().add(review);
+            distributor.setQuantity(distributor.getPoint().size());
+            distributorService.save(distributor);
+        }
         return "redirect:/api/v1/distributor/"+distributor.getId();
     }
     @PostMapping("/admin/distributor/create")
     public String createDistributor(@RequestParam String name, @RequestParam String address){
         Distributor distributor = new Distributor(name, address);
-        distributorService.save(distributor);
         distributorService.save(distributor);
         return "redirect:/api/v1/admin";
     }

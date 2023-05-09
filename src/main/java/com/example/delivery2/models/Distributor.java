@@ -21,6 +21,8 @@ public class Distributor {
     Long id;
     String name;
     String address;
+    @Column(columnDefinition = "TEXT")
+    String description;
     int quantity;
     String photo;
 

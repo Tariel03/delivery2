@@ -28,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // конфигурируем сам Spring Security
         // конфигурируем авторизацию
         http.authorizeRequests()
+                .antMatchers("/api/v1/deliver/**").hasAnyRole("DELIVER", "ADMIN")
+                .antMatchers("/api/v1/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/", "/hello", "/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
