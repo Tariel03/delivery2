@@ -1,6 +1,7 @@
 package com.example.delivery2.Controllers;
 
 import com.example.delivery2.Enums.Payment;
+import com.example.delivery2.Photos.PhotoConfig;
 import com.example.delivery2.Services.Impl.DistributorServiceImpl;
 import com.example.delivery2.Services.Impl.GoodsServiceImpl;
 import com.example.delivery2.Services.Impl.ZakazGoodServiceImpl;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -30,7 +32,6 @@ public class DistributorController {
     public String  distributorList( Model model, @ModelAttribute Distributor distributor){
         List<Distributor> distributors = distributorService.findAll();
         model.addAttribute(distributors);
-        System.out.println(distributors);
         return "distributor";
     }
     @GetMapping("/distributor/{id}")
@@ -56,8 +57,11 @@ public class DistributorController {
         return "redirect:/api/v1/distributor/"+distributor.getId();
     }
     @PostMapping("/admin/distributor/create")
-    public String createDistributor(@RequestParam String name, @RequestParam String address){
-        Distributor distributor = new Distributor(name, address);
+    public String createDistributor(@RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam("image")MultipartFile multipartFile){
+        PhotoConfig photoConfig = new PhotoConfig();
+        photoConfig.savePhoto(multipartFile);
+        Distributor distributor = new Distributor(name, address, description);
+        distributor.setPhoto("images/"+multipartFile.getOriginalFilename());
         distributorService.save(distributor);
         return "redirect:/api/v1/admin";
     }

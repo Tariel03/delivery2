@@ -1,4 +1,4 @@
-package com.example.delivery2.Controllers;
+package com.example.delivery2.errors;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;

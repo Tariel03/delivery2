@@ -14,9 +14,7 @@ import java.nio.file.Paths;
 public class PhotoConfig {
 //    @Value(value = "${home_dir}")
 //    private String uploadDir = "/home/iskender/Tariel/selim_team3";
-    private String uploadDir = "/home/iskender/Tariel/delivery2/delivery2/src/main/resources/static";
-    
-
+    private String uploadDir = "static/images";
     private Path path = Paths.get(uploadDir);
 
     public void savePhoto(MultipartFile file){

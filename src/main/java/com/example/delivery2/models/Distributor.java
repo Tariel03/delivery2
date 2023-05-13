@@ -26,9 +26,10 @@ public class Distributor {
     int quantity;
     String photo;
 
-    public Distributor(String name, String address) {
+    public Distributor(String name, String address, String description) {
         this.name = name;
         this.address = address;
+        this.description = description;
     }
     @ElementCollection(targetClass = Integer.class)
     @Column(name = "point")

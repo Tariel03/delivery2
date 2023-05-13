@@ -41,7 +41,9 @@ public class AdminController {
         Request request = requestService.findById(id);
         request.setRequestStatus(RequestStatus.Approved);
         Client client = request.getClient();
-        client.setRoles(Roles.ROLE_DELIVER);
+        if(client.getRoles().equals(Roles.ROLE_USER)){
+            client.setRoles(Roles.ROLE_DELIVER);
+        }
         requestService.save(request);
         clientService.save(client);
         return "redirect:/api/v1/admin";

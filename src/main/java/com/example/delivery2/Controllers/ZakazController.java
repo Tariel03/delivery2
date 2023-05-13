@@ -25,6 +25,7 @@ public class ZakazController {
     @GetMapping("/zakaz/all")
     public String allZakazs(Model model){
         model.addAttribute("zakazList",zakazService.findByClientAndZakazStatusNotLike(clientService.currentUser().get(),ZakazStatus.Declined));
+        model.addAttribute("zakazGoodService", zakazGoodService);
         return "bin";
     }
     @PostMapping("/zakaz/dead/{id}")

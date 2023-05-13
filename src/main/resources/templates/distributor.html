@@ -10,8 +10,9 @@
 <div th:each="distributor:${distributorList}">
 
     <a th:href="@{/api/v1/distributor/{id} (id = ${distributor.getId()})}">
-        <p th:text="${distributor.getName() + ', '+distributor.getAddress()}"></p>
-        <img th:src="@{/static/KFC_logo.svg.png}" alt="boo nigga" height="50%" width="50%">
+        <h6 th:text="${distributor.getName() + ', '+distributor.getAddress()}"></h6>
+        <p  th:text="${distributor.getDescription()}"> </p>
+        <img th:src="@{/{image}(image=${distributor.getPhoto()})}"  alt="no image"  height="20%" width="20%">
     </a>
 </div>
 

@@ -9,11 +9,26 @@
 <h4>Orders</h4>
 <div th:each="zakaz:${zakazList}">
     <h4 th:text="${'Delivery price is ' + zakaz.getTotalPrice()+', Quantity is ' + zakaz.getQuantity() + ' and Status is ' + zakaz.getZakazStatus()}"></h4>
+
+    <div th:each="zakazGood : ${zakazGoodService.findByZakaz(zakaz)}">
+        <div th:text="${zakazGood.getGoods().getPrice() +  zakazGood.getGoods().getName()}">
+            nothing
+        </div>
+    </div>
+    <br>
+    <div th:if="${zakaz.getDeliver() == null}">
+        <div>Not taken by deliver</div>
+    </div>
+    <div th:unless="${zakaz.getDeliver() == null}">
+        <h4>Deliver</h4>
+        <div th:text="${zakaz.getDeliver().getName() + ', number is ' + zakaz.getDeliver().number}">Not taken by deliver</div>
+    </div>
+
     <form action="#" th:action="@{/api/v1/authenticated/zakaz/dead/{id}(id=${zakaz.getId()})}" method="POST">
         <button type="submit">Decline!</button>
     </form>
 
-        </p>
+
     </div>
 
 </div>

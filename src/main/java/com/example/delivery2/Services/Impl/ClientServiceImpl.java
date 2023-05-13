@@ -77,6 +77,7 @@ public class ClientServiceImpl implements ClientService {
         if (!userDto.getNumber().isEmpty() && userDto.getNumber().length() >= 2) {
             client.setNumber(userDto.getNumber());
         }
+
         clientRepository.save(client);
     }
 

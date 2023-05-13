@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface GoodsService {
     Goods findById(Long id);
-    List<Goods> findByType(String type);
     List<Goods> findByDistributor(Distributor distributor);
     Goods save(Goods goods);
     List<Goods> findAll();
@@ -15,7 +14,6 @@ public interface GoodsService {
     List<Goods>searchByNameLike(String a);
 
 
-    List<Goods>findByDistributorAndType(Distributor distributor, String type);
 
 
 }
