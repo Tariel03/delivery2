@@ -10,4 +10,5 @@ import java.util.List;
 public interface ZakazGoodsRepository extends JpaRepository<ZakazGood, Long> {
     List<ZakazGood> findByGoods(Goods goods);
     List<ZakazGood> findByZakaz(Zakaz zakaz);
+    long countByGoodsAndZakaz(Goods goods, Zakaz zakaz);
 }

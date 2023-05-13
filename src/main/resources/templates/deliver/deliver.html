@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:each="zakaz:${zakazList}">
+    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment()}">
+        <br>
+
+    </h5>
+    <div th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">
+        <div th:text="${'Name '+ zakazgood.getGoods().getName() +',Price ' + zakazgood.getGoods().getPrice() }">
+
+        </div>
+
+    </div>
+    <br>
+    <form th:action="@{/api/v1/authenticated/deliver/take/zakaz/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
+        <button type="submit">Approve!</button>
+
+    </form>
+</div>
+<br><br>
+<h3>My orders!</h3>
+<div th:each="zakaz:${myZakazlist}" style="font-size: medium">
+    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment() + ',  Status '+ zakaz.getZakazStatus()}">
+    </h5>
+    <div th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">
+        <div th:text="${zakazgood.getGoods().getId()+ ', Name '+ zakazgood.getGoods().getName() +',Price ' + zakazgood.getGoods().getPrice() + ', ' + zakazGoodService.countByGoodsAndZakaz(zakazgood.getGoods(),zakaz  )  + 'X'}">
+        </div>
+    </div>
+    <form th:action="@{/api/v1/authenticated/deliver/decline/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
+        <button type="submit">Reject!</button>
+    </form>
+
+    <form th:action="@{/api/v1/authenticated/deliver/deliver/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
+        <button type="submit">Deliver!</button>
+    </form>
+
+
+
+
+</div>
+
+
+
+<h3>My info </h3>
+<div th:text="${client.getName() +', '+ client.getUsername() + ', '+ client.getRoles()}">
+</div>
+<br><br>
+<h5 th:text="${salary} + ' $'"></h5>
+
+<h4>Delivered</h4>
+
+<div th:each="zakaz:${zakazList1}">
+    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment() + ',  Status '+ zakaz.getZakazStatus()}">
+    </h5>
+</div>
+
+
+</body>
+</html>

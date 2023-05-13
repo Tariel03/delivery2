@@ -6,6 +6,7 @@ import lombok.*;
 
 @Entity
 @Setter
+@ToString
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,25 +17,14 @@ public class Goods {
     @ManyToOne
     @JoinColumn(name = "distributor_id")
     Distributor distributor;
-    String type;
     String name;
     @Column(columnDefinition = "text")
     String description;
     int price;
-
-
-    public Goods(String type, String description, int price) {
-        this.type = type;
+    String photo;
+    public Goods( String description, int price) {
         this.description = description;
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

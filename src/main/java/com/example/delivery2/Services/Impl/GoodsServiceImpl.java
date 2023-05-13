@@ -26,10 +26,6 @@ public class GoodsServiceImpl implements GoodsService {
         return optional.get() ;
     }
 
-    @Override
-    public List<Goods> findByType(String type) {
-        return  goodsRepository.findByType(type);
-    }
 
     @Override
     public List<Goods> findByDistributor(Distributor distributor) {
@@ -47,12 +43,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public List<Goods> searchByNameLikeAndDistributor(String name, Distributor distributor) {
+        return goodsRepository.searchByNameLikeAndDistributor(name, distributor);
+    }
+
+    @Override
     public List<Goods> searchByNameLike(String a) {
         return goodsRepository.searchByNameLike(a+"%");
     }
 
-    @Override
-    public List<Goods> findByDistributorAndType(Distributor distributor, String type) {
-        return goodsRepository.findByDistributorAndType(distributor,type);
-    }
+
 }

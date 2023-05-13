@@ -9,7 +9,7 @@
 
 </div>
 
-<form th:action="@{/api/v1/authenticated/client/edit/{client_id}(client_id=${client.getId()})}" method="POST">
+<form th:action="@{/api/v1/authenticated/client/edit/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">
     <label for="username1">Username:</label>
     <input type="text" id="username1" th:placeholder="${client.getUsername()}" name="username">
     <br>
@@ -17,10 +17,43 @@
     <input type="text" id="firstName" name="name" th:placeholder="${client.getName()}" >
     <label for="number">Number:</label>
     <input type="text" id="number" name="number" th:placeholder="${client.getNumber()}" >
-    <label for="number">Address:</label>
-
     <button type="submit">Edit Client</button>
+
 </form>
+<br>
+
+<div class="block" th:if="${!ecard.isEmpty()}">
+    <p th:text="'INN '+ ${ecard.get().getInn()}"></p>
+    <p th:text=" 'Date ' + ${ecard.get().getLocalDate()}"></p>
+    <p th:text=" 'Owner  ' + ${ecard.get().getClient().getName()}"></p>
+</div>
+<br>
+<div class="block" th:unless="${!ecard.isEmpty()}">
+    No card yet!
+    <form th:action="@{/api/v1/card/add/card}"  enctype="multipart/form-data" method="POST">
+        <label for="username1">INN:</label>
+        <input type="number" id="name2" th:placeholder="${client.getUsername()}" name="inn">
+        <br>
+        <label for="firstName">Bank name:</label>
+        <input type="text" id="firstName2" name="bankName"  >
+        <label for="number">Date:</label>
+        <input type="date" id="number2" name="date" >
+        <button type="submit">Add card</button>
+
+    </form>
+</div>
+
+
+
+<img th:src="@{/{image}(image=${client.getPhoto()})}"  alt="no image" height="300px" width="300px">
+
+
+<form th:action="@{/api/v1/authenticated/client/change/photo/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">
+    <label for="photo">Image:</label>
+    <input type="file" id ="photo" name = "image">
+    <button type="submit">Change photo</button>
+</form>
+
 
 <div th:each="request:${requests}">
     <h2 th:text="${request.getRequestStatus()}">

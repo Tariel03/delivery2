@@ -10,4 +10,6 @@ public interface ZakazGoodService {
     List<ZakazGood>findByGoods(Goods goods);
     void save(ZakazGood zakazGood);
     void clear();
+    long countByGoodsAndZakaz(Goods goods, Zakaz zakaz);
+
 }

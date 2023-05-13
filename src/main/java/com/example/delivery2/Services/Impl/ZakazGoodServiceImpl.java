@@ -33,4 +33,9 @@ public class ZakazGoodServiceImpl implements ZakazGoodService {
         zakazGoodsRepository.deleteAll();
 
     }
+
+    @Override
+    public long countByGoodsAndZakaz(Goods goods, Zakaz zakaz) {
+        return zakazGoodsRepository.countByGoodsAndZakaz(goods, zakaz);
+    }
 }

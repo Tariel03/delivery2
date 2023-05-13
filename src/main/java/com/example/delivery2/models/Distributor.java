@@ -21,12 +21,15 @@ public class Distributor {
     Long id;
     String name;
     String address;
+    @Column(columnDefinition = "TEXT")
+    String description;
     int quantity;
     String photo;
 
-    public Distributor(String name, String address) {
+    public Distributor(String name, String address, String description) {
         this.name = name;
         this.address = address;
+        this.description = description;
     }
     @ElementCollection(targetClass = Integer.class)
     @Column(name = "point")

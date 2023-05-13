@@ -14,6 +14,11 @@ public interface ZakazService {
     Zakaz save(Zakaz zakaz);
     List<Zakaz>findByClient(Client client);
     List<Zakaz>findByZakazStatus(ZakazStatus zakazStatus);
+    List<Zakaz>findByZakazStatusAndDeliver(ZakazStatus zakazStatus, Client deliver);
+    Double countSalary(Long deliver_id);
+    List<Zakaz>findByDeliver(Client deliver);
+
+    long countByDeliver(Client deliver);
     List<Zakaz>findByClientAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus);
 
 

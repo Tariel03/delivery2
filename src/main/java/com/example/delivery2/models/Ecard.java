@@ -29,4 +29,5 @@ public class Ecard {
         this.localDate = localDate;
         this.bankName = bankName;
     }
+
 }

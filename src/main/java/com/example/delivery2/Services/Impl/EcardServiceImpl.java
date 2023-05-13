@@ -2,6 +2,7 @@ package com.example.delivery2.Services.Impl;
 
 import com.example.delivery2.Exceptions.MainException;
 import com.example.delivery2.Services.EcardService;
+import com.example.delivery2.models.Client;
 import com.example.delivery2.models.Ecard;
 import com.example.delivery2.models.Goods;
 import com.example.delivery2.repositories.EcardRepository;
@@ -50,6 +51,18 @@ public class EcardServiceImpl implements EcardService{
             throw new MainException("");
         }
         return optionalEcard.get();
+    }
+
+    @Override
+    public Optional<Ecard> findByClient(Client client) {
+        Optional<Ecard> optionalEcard = ecardRepository.findByClient(client);
+        return optionalEcard;
+    }
+
+    @Override
+    public void save(Ecard ecard) {
+        ecardRepository.save(ecard);
+
     }
 
 
