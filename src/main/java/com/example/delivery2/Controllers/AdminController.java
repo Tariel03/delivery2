@@ -55,5 +55,14 @@ public class AdminController {
         requestService.save(request);
         return "redirect:/api/v1/admin";
     }
+    @PostMapping("/make/admin/{deliver_id}")
+    public String makeAdmin(@PathVariable Long deliver_id){
+        Client client = clientService.findById(deliver_id);
+        if(client.getRoles().equals(Roles.ROLE_DELIVER)){
+            client.setRoles(Roles.ROLE_ADMIN);
+        }
+        clientService.save(client);
+        return "redirect:/api/v1/admin";
+    }
     
 }
