@@ -53,8 +53,8 @@ public class ClientController {
         clientService.save(client);
         return "redirect:/api/v1/authenticated/client";
     }
-    @PostMapping("/add/card/{client_id}")
-    String addCard(@RequestParam Long inn, @RequestParam  LocalDate localDate,@PathVariable Long client_id, @RequestParam String bankName){
+    @PostMapping("/add/card")
+    String addCard(@RequestParam Long inn, @RequestParam  LocalDate localDate, @RequestParam String bankName){
         Ecard ecard = new Ecard(inn,localDate,bankName);
         ecard.setClient(clientService.currentUser().get());
         return "personalPage";
