@@ -1,37 +1,46 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../static/css/basket.css" th:href="@{/css/basket.css}" />
 </head>
 <body>
-<h1>BIN!</h1>
-<h4>Orders</h4>
-<div th:each="zakaz:${zakazList}">
-    <h4 th:text="${'Delivery price is ' + zakaz.getTotalPrice()+', Quantity is ' + zakaz.getQuantity() + ' and Status is ' + zakaz.getZakazStatus()}"></h4>
-
-    <div th:each="zakazGood : ${zakazGoodService.findByZakaz(zakaz)}">
-        <div th:text="${zakazGood.getGoods().getPrice() +  zakazGood.getGoods().getName()}">
+<div  class="CartContainer">
+    <div class="Header">
+        <h3 class="Heading">Shopping Cart</h3>
+        <h5 class="Action">Remove all</h5>
+    </div>
+    <div th:each="zakazGood :${zakazGoodService.findByZakaz(zakaz)}">
+        <div th:text="${zakazGood.getGoods().getName()+' ' +zakazGood.getGoods().getPrice()}">
             nothing
         </div>
     </div>
-    <br>
-    <div th:if="${zakaz.getDeliver() == null}">
-        <div>Not taken by deliver</div>
-    </div>
-    <div th:unless="${zakaz.getDeliver() == null}">
-        <h4>Deliver</h4>
-        <div th:text="${zakaz.getDeliver().getName() + ', number is ' + zakaz.getDeliver().number}">Not taken by deliver</div>
-    </div>
+    <div th:each="zakaz:${zakazList}">
+        <h4 th:text="${'Delivery price is ' + zakaz.getTotalPrice()+', Quantity is ' + zakaz.getQuantity() + ' and Status is ' + zakaz.getZakazStatus()}"></h4>
 
-    <form action="#" th:action="@{/api/v1/authenticated/zakaz/dead/{id}(id=${zakaz.getId()})}" method="POST">
-        <button type="submit">Decline!</button>
-    </form>
+
+        <br>
+        <div th:if="${zakaz.getDeliver() == null}">
+            <div>Not taken by deliver</div>
+        </div>
+        <div th:unless="${zakaz.getDeliver() == null}">
+            <h4>Deliver</h4>
+            <div th:text="${zakaz.getDeliver().getName() + ', number is ' + zakaz.getDeliver().number}">Not taken by deliver</div>
+        </div>
+
+        <form action="#" th:action="@{/api/v1/authenticated/zakaz/dead/{id}(id=${zakaz.getId()})}" method="POST">
+            <button type="submit">Decline!</button>
+        </form>
 
 
     </div>
 
 </div>
-
+</div>
+<script type="text/javascript" th:src="@{/js/basket.js}"></script>
 </body>
 </html>

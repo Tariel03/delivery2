@@ -1,63 +1,336 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../static/css/zakaz.css" th:href="@{/css/zakaz.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../static/css/ordering.css" th:href="@{/css/ordering.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<div class="div4">
+    <div class="nav-header1">
+        <div class="component-11">
+            <div class="component-1-inner"></div>
+            <div class="search1">Search</div>
+            <img class="vector-icon2" alt="" src="/images/vector.svg" />
 
-<form th:action="@{/api/v1/goods/search/{distributor_id} (distributor_id = ${distributor.getId()})}" method="post">
-    <label >
-        <input type="text" name="name" placeholder="Search by name">
-    </label>
-    <button type="submit">Search</button>
-</form>
-
-<br>
-<div th:text="${distributor.getName()}"></div>
-<img th:src="@{/{image}(image=${distributor.getPhoto()})}" alt="no image"  height="20%" width="20%">
-<p th:text="${distributor.getDescription()}"></p>
-
-
-<div th:each="good:${goods}">
-        <p th:text="${good.getName()  +', ' + good.getPrice()}"></p>
-    <img th:src="@{/{image}(image=${good.getPhoto()})}" alt="no image"  height=5%" width=5%">
-        <form action="#" th:action="@{/api/v1/goods/zakaz/{goods_id}/{distributor_id}(goods_id=${good.getId()}, distributor_id = ${distributor.getId()})}" method="POST">
-        <button type="submit">Add to Zakaz</button>
-    </form>
-</div>
-    <div th:each="zakazGood : ${zakazGoods}">
-        <div th:text="${zakazGood.getGoods().getPrice() +  zakazGood.getGoods().getName()}">
-        nothing
+            <div class="line-div"></div>
+        </div>
+        <div class="delivery2" id="deliveryText">Delivery</div>
+        <div class="paper-plane-11"></div>
+        <img class="nav-header-item" alt="" src="/images/vector-2.svg" />
+    </div>
+    <div class="navigation-bar1">
+        <div class="account2" id="accountText">
+            <p class="account3">Account</p>
+        </div>
+        <div class="services-group">
+            <div class="services1">Services</div>
+            <img
+                    class="akar-iconschevron-down2"
+                    alt=""
+                    src="/images/akariconschevrondown1.svg"
+            />
+        </div>
+        <div class="menu-group">
+            <div class="services1">Menu</div>
+            <img
+                    class="akar-iconschevron-down2"
+                    alt=""
+                    src="/images/akariconschevrondown1.svg"
+            />
         </div>
     </div>
+    <div class="frame-div">
+        <div class="carbonlogin-group">
+            <img
+                    class="carbonlogin-icon1"
+                    alt=""
+                    src="/images/carbonlogin.svg"
+            />
+
+            <div class="login1">Login</div>
+        </div>
+    </div>
+    <img
+            class="converted-2-icon2"
+            alt=""
+            src="/images/17372-converted-2@2x.png"
+    />
+    <div class="child6" >
+        <img class="kfc1" th:src="@{/{image}(image=${distributor.getPhoto()})}" alt="no image" />
+        <b class="kf" th:text="${distributor.getName()}"></b>
+
+        <div class="frame-parent">
+
+            <div class="frame-group">
+
+                <div class="vector-parent">
+                    <div class="rating-area">
+                        <input type="radio" id="star-5" name="rating" value="5">
+                        <label for="star-5" title="Оценка «5»"></label>
+                        <input type="radio" id="star-4" name="rating" value="4">
+                        <label for="star-4" title="Оценка «4»"></label>
+                        <input type="radio" id="star-3" name="rating" value="3">
+                        <label for="star-3" title="Оценка «3»"></label>
+                        <input type="radio" id="star-2" name="rating" value="2">
+                        <label for="star-2" title="Оценка «2»"></label>
+                        <input type="radio" id="star-1" name="rating" value="1">
+                        <label for="star-1" title="Оценка «1»"></label>
+
+                    </div>
+                </div>
+                <div class="div6" th:text = "${distributor.getQuantity()+' раз мы были рассмотрены'}">
+                </div>
+                <form style="margin-left: 55px" th:action="@{/api/v1/distributor/review/{id}(id=${distributor.getId()})}" method="POST">
+                    <input class="ball" type="number" id="review" name="review" placeholder="0-10" >
+                    <button class="point" type="submit">O</button>
+                </form>
+
+            </div>
+            <img class="frame-child" alt="" src="/images/vector-1.svg" />
+            <div class="frame-container">
+                <div class="mins-parent">
+                    <div class="mins">30Mins</div>
+                    <img class="vector-icon7" alt="" src="/images/vector5.svg" />
+                </div>
+                <div class="div7">Время доставки</div>
+            </div>
+        </div>
+    </div>
+    <img class="child7" alt="" src="/images/vector-21.svg" />
+
+    <img class="child8" alt="" src="/images/vector-21.svg" />
+
+    <img class="child9" alt="" src="/images/vector-21.svg" />
+
+    <img class="child10" alt="" src="/images/vector-5.svg" />
 
 
-<form action="#" th:action="@{/api/v1/authenticated/zakaz/make}" method="POST">
-    <select th:field="*{payments}" >
-        <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}">
-        </option>
-    </select>
-    <label for="address">Address:</label>
-    <input type="text" id="address" name="address" placeholder="Enter your address" >
-    <button type="submit">Make zakaz</button>
-</form>
 
 
 
+    <figure class="rectangle-container" th:each="good:${goods}">
+        <figcaption>
+            <img class="frame-item" th:src="@{/{image}(image=${good.getPhoto()})}" alt="no image"/>
 
-<h2>Reviews</h2>
-<div th:text = "${total + '*****'}"></div>
-<div th:text = "${distributor.getQuantity() + ' times we were reviewed'}"></div>
-<h2>TO review</h2>
+            <div class="div8" th:text="${good.getName()}">Шеф бургер</div>
+            <div class="material-symbolsadd-circle-ou"></div>
+            <div class="frame-parent1">
+                <div class="vector-group">
+                    <img class="vector-icon8" alt="" src="/images/vector6.svg" />
 
-<form action="#" th:action="@{/api/v1/distributor/review/{id}(id=${distributor.getId()})}" method="POST">
-    <input type="number" id="review" name="review" placeholder="Review" >
+                    <div class="c" th:text="${good.getPrice()+' сом'}">200 c</div>
+                </div>
+                <form action="#" th:action="@{/api/v1/goods/zakaz/{goods_id}/{distributor_id}(goods_id=${good.getId()}, distributor_id = ${distributor.getId()})}" method="POST">
+                    <button type="submit" class="btn material-symbolsadd-circle-ou-icon"><i class="fa fa-plus-circle " style="font-size:30px"></i></button>
 
-    <button type="submit">review</button>
-</form>
+                </form>
 
 
+            </div>
+        </figcaption>
 
+    </figure>
+    <div class="group-div">
+        <div class="group-child"></div>
+        <div class="group-item"></div>
+    </div>
+    <b class="b9">Разделы</b>
+    <div class="div12">
+        <p class="p1">Комбо</p>
+    </div>
+    <div class="div13">
+        <p class="p1">Баскеты</p>
+    </div>
+    <div class="component-2">
+        <img
+                class="akar-iconschevron-down4"
+                alt=""
+                src="/images/akariconschevrondown.svg"
+        />
+
+        <div class="div14">Курица</div>
+    </div>
+    <div class="div15">
+        <p class="p1">Сендвичи</p>
+    </div>
+    <div class="div16">Гарниры</div>
+    <b class="b10">Самое популярное</b>
+    <div class="container">
+        <form class="form1" th:action="@{/api/v1/goods/search/{distributor_id} (distributor_id = ${distributor.getId()})}" method="post">
+            <input class="inputt" type="search" placeholder="Search...">
+            <button class="buttonn" type="submit">Search</button>
+        </form>
+    </div>
+
+    <div id="icon" onclick="toggleDiv()"><span id="ico" class="first-icon"></span></div>
+    <div class="rectangle-div" id="myDiv" style="display: none">
+        <div class="b11">
+            <b>Ваш заказ</b>
+            <br>
+            <br>
+            <br>
+            <div th:each="zakazGood : ${zakazGoods}">
+                <div style="font-size: 20px" th:text="${zakazGood.getGoods().getName()}">nothing</div>
+                <br>
+            </div>
+        </div>
+        <button class="wrapper section__button section__button1">Make zakaz</button>
+    </div>
+    <form action="#" th:action="@{/api/v1/authenticated/zakaz/make}" method="POST">
+        <div class="modal modal1">
+            <div class="modal__main">
+                <div class="vector-parent4">
+                    <img class="vector-icon16" alt="" src="/images/vector9.svg" />
+                    <div class="div35">Адрес доставки</div>
+                </div>
+
+                <div class="modal__container">
+                    <div class="vector-parent5">
+                        <img class="vector-icon16" alt="" src="/images/vector11.svg" />
+                        <div class="div55">
+                            <input style="color: #212529;background: transparent;border: none;" type="text" id="address" name="address" placeholder="Enter your address" ></div>
+                    </div>
+                    <b class="b6">Способ оплаты</b>
+                    <img
+                            class="mdicredit-card-outline-icon"
+                            alt=""
+                            src="/images/mdicreditcardoutline.svg"
+                    />
+                    <div class="child11"></div>
+                    <div class="div57">
+                        <select style="border: none; width: 303px;position: absolute;top: -244px"  th:field="*{payments}" >
+                            <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="modal__btn" type="submit">Заказать</button>
+                <button class="modal__close" >&#10006;</button>
+            </div>
+        </div>
+    </form>
+
+
+    <!--        <form action="#" th:action="@{/api/v1/authenticated/zakaz/make}" method="POST">-->
+    <!--        <div style="position: absolute;top: -650px;left: -60px">-->
+    <!--            <div class="vector-parent4">-->
+    <!--                <img class="vector-icon16" alt="" src="/images/vector9.svg" />-->
+    <!--                <div class="div35">Адрес доставки</div>-->
+    <!--            </div>-->
+    <!--            <div class="vector-parent5">-->
+    <!--                <img class="vector-icon16" alt="" src="/images/vector11.svg" />-->
+    <!--                <div class="div55"><input type="text" id="address" name="address" placeholder="Enter your address" ></div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+
+
+    <!--            <b style="position: absolute;top: -260px">Способ оплаты</b>-->
+    <!--            <img-->
+    <!--                    class="mdicredit-card-outline-icon"-->
+    <!--                    alt=""-->
+    <!--                    src="/images/mdicreditcardoutline.svg"-->
+    <!--            />-->
+    <!--            <select  th:field="*{payments}" style="position:absolute;top: -206px;left: 45px;width: 300px;height: 30px" >-->
+    <!--                <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}">-->
+    <!--                </option>-->
+    <!--            </select>-->
+    <!--            <div class="wrapper" >-->
+    <!--                <button type="submit">Make zakaz</button>-->
+    <!--            </div>-->
+    <!--        </form>-->
+
+
+    <div class="footer1">
+        <div class="delivery3">Delivery</div>
+        <img
+                class="converted-2-icon3"
+                alt=""
+                src="/images/17372-converted-2@2x.png"
+        />
+
+        <div class="group">
+            <div class="c">О нас</div>
+            <div class="c">Доставка</div>
+            <div class="c">Поддержка</div>
+        </div>
+        <div class="contact-group">
+            <div class="c">Contact:</div>
+            <b class="b12">+996 559 717 933</b>
+        </div>
+    </div>
+    <div class="facebook-icon-parent">
+        <img
+                class="material-symbolsadd-circle-ou"
+                alt=""
+                src="/images/facebook-icon.svg"
+        />
+
+        <img class="vector-icon13" alt="" src="/images/vector8.svg" />
+
+        <img class="twitter-icon1" alt="" src="/images/twitter-icon.svg" />
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/icon.js}"></script>
+<script>const modalController = ({modal, btnOpen, btnClose, time = 300}) => {
+    const buttonElems = document.querySelectorAll(btnOpen);
+    const modalElem = document.querySelector(modal);
+
+    modalElem.style.cssText = `
+        display: flex;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity ${time}ms ease-in-out;
+      `;
+
+    const closeModal = event => {
+        const target = event.target;
+
+        if (
+            target === modalElem ||
+            (btnClose && target.closest(btnClose)) ||
+            event.code === 'Escape'
+        ) {
+
+            modalElem.style.opacity = 0;
+
+            setTimeout(() => {
+                modalElem.style.visibility = 'hidden';
+            }, time);
+
+            window.removeEventListener('keydown', closeModal);
+        }
+    }
+
+    const openModal = () => {
+        modalElem.style.visibility = 'visible';
+        modalElem.style.opacity = 1;
+        window.addEventListener('keydown', closeModal)
+    };
+
+    buttonElems.forEach(btn => {
+        btn.addEventListener('click', openModal);
+    });
+
+    modalElem.addEventListener('click', closeModal);
+};
+
+modalController({
+    modal: '.modal1',
+    btnOpen: '.section__button1',
+    btnClose: '.modal__close',
+});
+
+modalController({
+    modal: '.modal2',
+    btnOpen: '.section__button2',
+    btnClose: '.modal__close'
+});</script>
 </body>
 </html>
