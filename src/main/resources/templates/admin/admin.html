@@ -81,8 +81,33 @@
 </div>
 
 
+<h1>Create admin</h1>
 
+<form method="post" th:action="@{/api/v1/admin/create}">
+    <label for="username1">Username:</label>
+    <input type="text" id="username1" name="username" required>
+    <br>
+    <label for="password1">Password:</label>
+    <input type="password" id="password1" name="password" required>
+    <br>
+    <label for="firstName2">First Name:</label>
+    <input type="text" id="firstName2" name="name" required>
+    <label for="number">Number:</label>
+    <input type="text" id="number" name="number" required>
+    <button type="submit">Submit</button>
+</form>
+<br>
 
+<h1>Promote deliver</h1>
+
+<div th:each="deliver:${delivers}">
+    <p th:text="${deliver.getName() + ', ' + deliver.getNumber() + ', '+ deliver.getRoles()}">
+
+    <form method="post" th:action="@{/api/v1/admin/make/admin/{deliver_id} (deliver_id = ${deliver.getId()})}">
+        <button type="submit">Submit</button>
+    </form>
+    </p>
+</div>
 
 </body>
 </html>

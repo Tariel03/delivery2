@@ -1,21 +1,27 @@
 package com.example.delivery2.Services.Impl;
 
+import com.example.delivery2.Enums.Payment;
 import com.example.delivery2.Enums.ZakazStatus;
 import com.example.delivery2.Services.ZakazService;
 import com.example.delivery2.models.Client;
 import com.example.delivery2.models.Goods;
 import com.example.delivery2.models.Zakaz;
+import com.example.delivery2.models.ZakazGood;
 import com.example.delivery2.repositories.ZakazRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @AllArgsConstructor
 public class ZakazServiceImpl implements ZakazService {
     ZakazRepository zakazRepository;
+    ClientServiceImpl clientService;
+    DistributorServiceImpl distributorService;
+    ZakazGoodServiceImpl zakazGoodService;
     @Override
     public List<Zakaz> findAll() {
         return zakazRepository.findAll();
@@ -66,6 +72,34 @@ public class ZakazServiceImpl implements ZakazService {
     @Override
     public List<Zakaz> findByDeliver(Client deliver) {
         return zakazRepository.findByDeliver(deliver);
+    }
+
+    @Override
+    public void setZakazGood(List<ZakazGood> zakazGoods, String address, Payment payment, Long deliver_id) {
+        AtomicInteger total = new AtomicInteger();
+        zakazGoods.forEach(zakazGood -> {
+            total.addAndGet(zakazGood.getGoods().getPrice());
+        });
+        Zakaz zakaz = new Zakaz();
+        zakaz.setAddress(address);
+        System.out.println(zakaz);
+        zakaz.setPayment(payment);
+        zakaz.setDistributor(distributorService.findById(deliver_id));
+        zakaz.setTotalPrice(total.get() + 65);
+        zakaz.setClient(clientService.currentUser().get());
+        zakaz.setQuantity(zakazGoods.size());
+        zakaz.setDeliveryPrice(65);
+        zakaz.setZakazStatus(ZakazStatus.Received);
+        zakazRepository.save(zakaz);
+        System.out.println(zakaz);
+        zakazGoods.forEach(zakazGood -> {
+            zakazGood.setZakaz(zakaz);
+        });
+        for (ZakazGood z : zakazGoods
+        ) {
+            zakazGoodService.save(z);
+        }
+        System.out.println(zakaz);
     }
 
     @Override
