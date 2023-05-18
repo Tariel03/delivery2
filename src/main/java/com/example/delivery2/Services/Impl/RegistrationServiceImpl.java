@@ -42,6 +42,17 @@ public class RegistrationServiceImpl implements RegistrationService {
         clientRepository.save(client);
 
     }
+    @Override
+    public void createAdmin(Client client){
+        if(clientRepository.findByUsername(client.getUsername()).isPresent()){
+            throw new MainException("There is already person by this username");
+        }
+        client.setRoles(Roles.ROLE_ADMIN);
+        client.setStatus(true);
+        client.setPassword(passwordEncoder.encode(client.getPassword()));
+        clientRepository.save(client);
+
+    }
 
     @Override
     public Client toEntity(UserDto userDto) {

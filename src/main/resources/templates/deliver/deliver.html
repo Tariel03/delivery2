@@ -7,7 +7,7 @@
 <body>
 
 <div th:each="zakaz:${zakazList}">
-    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment()}">
+    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment() + ', Restaraunt address is '+ zakaz.distributor.address}">
         <br>
 
     </h5>

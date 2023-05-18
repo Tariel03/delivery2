@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<div th:text="${client.getId() + ', '+client.getName()+', '+client.getNumber() + ', '+client.getUsername()}">
+<div th:text="${client.getId() + ', '+client.getName()+', '+client.getNumber() + ', '+client.getUsername() +', '+ client.getRoles()}">
 
 </div>
 
@@ -26,6 +26,11 @@
     <p th:text="'INN '+ ${ecard.get().getInn()}"></p>
     <p th:text=" 'Date ' + ${ecard.get().getLocalDate()}"></p>
     <p th:text=" 'Owner  ' + ${ecard.get().getClient().getName()}"></p>
+    <br>
+    <form th:action="@{/api/v1/card/delete/card/{id} (id = ${ecard.get().getId()})}"   method="POST">
+        <button type="submit">Delete card</button>
+    </form>
+
 </div>
 <br>
 <div class="block" th:unless="${!ecard.isEmpty()}">

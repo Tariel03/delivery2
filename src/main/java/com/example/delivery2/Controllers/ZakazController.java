@@ -5,9 +5,11 @@ import com.example.delivery2.Enums.ZakazStatus;
 import com.example.delivery2.Services.Impl.ClientServiceImpl;
 import com.example.delivery2.Services.Impl.ZakazGoodServiceImpl;
 import com.example.delivery2.Services.Impl.ZakazServiceImpl;
+import com.example.delivery2.dto.ZakazDto;
 import com.example.delivery2.models.Zakaz;
 import com.example.delivery2.models.ZakazGood;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,7 @@ public class ZakazController {
         return "bin";
     }
     @PostMapping("/zakaz/dead/{id}")
-    public String killZakaz(Model model, @PathVariable Long id) throws Exception {
+    public String killZakaz( @PathVariable Long id) throws Exception {
         Zakaz zakaz = zakazService.findById(id);
         zakaz.setZakazStatus(ZakazStatus.Declined);
         zakazService.save(zakaz);
@@ -59,33 +61,10 @@ public class ZakazController {
         return "redirect:/api/v1/deliver";
     }
 
-
-    @PostMapping("zakaz/make")
-    public String makeZakaz(@RequestParam String address){
-        AtomicInteger total = new AtomicInteger();
+    @PostMapping(value = "zakaz/make/{distributor_id}",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String makeZakaz(ZakazDto zakazDto,@PathVariable Long distributor_id){
         List<ZakazGood> zakazGoods = zakazGoodService.findByZakaz(null);
-        zakazGoods.forEach(zakazGood -> {
-            total.addAndGet(zakazGood.getGoods().getPrice());
-        });
-        Zakaz zakaz = new Zakaz();
-        zakaz.setAddress(address);
-        System.out.println(zakaz);
-        zakazGoods.forEach(zakazGood -> {
-            zakazGood.setZakaz(zakaz);
-        });
-        for (ZakazGood z : zakazGoods
-        ) {
-            zakazGoodService.save(z);
-        }
-        System.out.println(zakaz);
-        zakaz.setPayment(Payment.Cash);
-        zakaz.setTotalPrice(total.get() + 65);
-        zakaz.setClient(clientService.currentUser().get());
-        zakaz.setQuantity(zakazGoods.size());
-        zakaz.setDeliveryPrice(65);
-        zakaz.setZakazStatus(ZakazStatus.Received);
-        zakazService.save(zakaz);
-        System.out.println(zakaz);
+        zakazService.setZakazGood(zakazGoods,zakazDto.getAddress(),zakazDto.getPayment(), distributor_id);
         return "redirect:/api/v1/authenticated/zakaz/all";
 
     }

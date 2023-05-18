@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface RegistrationService {
     Optional<Client> login(AuthDto authDto);
     void registration(UserDto userDto);
+    void createAdmin(Client client);
     void save(Client client);
     Client toEntity(UserDto userDto);
     UserDto toDto(Client client);

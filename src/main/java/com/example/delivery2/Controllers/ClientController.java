@@ -37,8 +37,6 @@ public class ClientController {
     @PostMapping("/client/edit/{client_id}")
     String editMe(@PathVariable Long client_id, @RequestParam String username, @RequestParam String name, @RequestParam String number){
         UpdateUserDto userDto = new UpdateUserDto(username,name,number);
-//        PhotoConfig photoConfig = new PhotoConfig();
-//        photoConfig.savePhoto(multipartFile);
         clientService.edit(userDto, clientService.findById(client_id));
 
         return "redirect:/auth/login";

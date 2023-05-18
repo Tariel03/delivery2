@@ -33,15 +33,25 @@
     </div>
 
 
-<form action="#" th:action="@{/api/v1/authenticated/zakaz/make}" method="POST">
-    <select th:field="*{payments}" >
-        <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}">
-        </option>
+<!--<form action="#" th:action="@{/api/v1/authenticated/zakaz/make}" method="POST" th:object="${zakazDto}"  enctype="application/x-www-form-urlencoded">-->
+<!--    <select th:field="*{payment}" >-->
+<!--        <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}">-->
+<!--        </option>-->
+<!--    </select>-->
+<!--    <label for="address">Address:</label>-->
+<!--    <input type="text" id="address" name="address" placeholder="Enter your address"  th:field="*{address}">-->
+<!--    <button type="submit">Make zakaz</button>-->
+<!--</form>-->
+
+<form action="#" th:action="@{/api/v1/authenticated/zakaz/make/{distributor_id} (distributor_id = ${distributor.getId()})}" method="POST" th:object="${zakazDto}">
+    <select name="payment" th:field="*{payment}">
+        <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}"></option>
     </select>
     <label for="address">Address:</label>
-    <input type="text" id="address" name="address" placeholder="Enter your address" >
+    <input type="text" id="address" name="address" placeholder="Enter your address" th:field="*{address}">
     <button type="submit">Make zakaz</button>
 </form>
+
 
 
 

@@ -1,9 +1,11 @@
 package com.example.delivery2.Services;
 
+import com.example.delivery2.Enums.Payment;
 import com.example.delivery2.Enums.ZakazStatus;
 import com.example.delivery2.models.Client;
 import com.example.delivery2.models.Goods;
 import com.example.delivery2.models.Zakaz;
+import com.example.delivery2.models.ZakazGood;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ public interface ZakazService {
     List<Zakaz>findByZakazStatusAndDeliver(ZakazStatus zakazStatus, Client deliver);
     Double countSalary(Long deliver_id);
     List<Zakaz>findByDeliver(Client deliver);
+
+    void setZakazGood(List<ZakazGood> zakazGoodList, String address, Payment payment, Long deliver_id);
+
 
     long countByDeliver(Client deliver);
     List<Zakaz>findByClientAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus);
