@@ -11,6 +11,8 @@ public interface RegistrationService {
     void registration(UserDto userDto);
     void createAdmin(Client client);
     void save(Client client);
+    void createAdmin(Client client);
+
     Client toEntity(UserDto userDto);
     UserDto toDto(Client client);
 
