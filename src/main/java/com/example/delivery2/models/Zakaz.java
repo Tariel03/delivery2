@@ -34,6 +34,9 @@ public class Zakaz {
    @ManyToOne
    @JoinColumn(name = "zakazGood_id")
    ZakazGood zakazGood;
+    @ManyToOne
+    @JoinColumn(name = "distributor_id")
+    Distributor distributor;
     String address;
     @Enumerated(EnumType.STRING)
     Payment payment;

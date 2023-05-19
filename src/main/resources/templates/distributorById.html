@@ -246,14 +246,14 @@
     <!--            </div>-->
     <!--        </form>-->
 
-
-    <div class="footer1">
-        <div class="delivery3">Delivery</div>
-        <img
-                class="converted-2-icon3"
-                alt=""
-                src="/images/17372-converted-2@2x.png"
-        />
+<form action="#" th:action="@{/api/v1/authenticated/zakaz/make/{distributor_id} (distributor_id = ${distributor.getId()})}" method="POST" th:object="${zakazDto}">
+    <select name="payment" th:field="*{payment}">
+        <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}"></option>
+    </select>
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" placeholder="Enter your address" th:field="*{address}">
+    <button type="submit">Make zakaz</button>
+</form>
 
         <div class="group">
             <div class="c">О нас</div>

@@ -9,10 +9,7 @@ import com.example.delivery2.repositories.ZakazRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
@@ -23,6 +20,7 @@ public class AdminController {
     DistributorServiceImpl distributorService;
     GoodsServiceImpl goodsService;
     ZakazServiceImpl zakazService;
+    RegistrationServiceImpl registrationService;
     @GetMapping
     public String admin(Model model){
         model.addAttribute("client",clientService.currentUser().get());
@@ -55,5 +53,17 @@ public class AdminController {
         requestService.save(request);
         return "redirect:/api/v1/admin";
     }
+
+    @PostMapping("/make/admin/{deliver_id}")
+    public String makeAdmin(@PathVariable Long deliver_id){
+        Client client = clientService.findById(deliver_id);
+        if(client.getRoles().equals(Roles.ROLE_DELIVER)){
+            client.setRoles(Roles.ROLE_ADMIN);
+        }
+        clientService.save(client);
+        return "redirect:/api/v1/admin";
+    }
+
+
     
 }

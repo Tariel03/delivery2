@@ -6,6 +6,7 @@ import com.example.delivery2.Services.Impl.EcardServiceImpl;
 import com.example.delivery2.models.Ecard;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,11 @@ public class EcardController {
         Ecard ecard =  new Ecard(inn,date1,bankName);
         ecard.setClient(clientService.currentUser().get());
         ecardService.save(ecard);
+        return "redirect:/api/v1/authenticated/client";
+    }
+    @PostMapping("/delete/card/{id}")
+    public String deleteCard(@PathVariable Long id){
+        ecardService.deleteCard(id);
         return "redirect:/api/v1/authenticated/client";
     }
 

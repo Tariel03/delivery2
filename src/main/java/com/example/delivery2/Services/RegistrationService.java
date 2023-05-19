@@ -10,6 +10,8 @@ public interface RegistrationService {
     Optional<Client> login(AuthDto authDto);
     void registration(UserDto userDto);
     void save(Client client);
+    void createAdmin(Client client);
+
     Client toEntity(UserDto userDto);
     UserDto toDto(Client client);
 

@@ -44,6 +44,7 @@ public class DistributorController {
         model.addAttribute("goods", goodsService.findByDistributor(distributorService.findById(id)));
         model.addAttribute("zakazGoods",zakazGoodService.findByZakaz(null));
         model.addAttribute("payments",Payment.values());
+        model.addAttribute(new ZakazDto());
         return "distributorById";
     }
     @PostMapping("/distributor/review/{id}")
