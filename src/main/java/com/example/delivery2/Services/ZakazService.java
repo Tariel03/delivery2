@@ -19,8 +19,6 @@ public interface ZakazService {
     List<Zakaz>findByZakazStatusAndDeliver(ZakazStatus zakazStatus, Client deliver);
     Double countSalary(Long deliver_id);
     List<Zakaz>findByDeliver(Client deliver);
-    public void setZakazGood(List<ZakazGood> zakazGoods, String address, Payment payment, Long deliver_id);
-
 
     void setZakazGood(List<ZakazGood> zakazGoodList, String address, Payment payment, Long deliver_id);
 

@@ -11,46 +11,6 @@
           href="/static/css/personal_area.css" th:href="@{/css/card.css}" />
 </head>
 <body>
-<div th:text="${client.getId() + ', '+client.getName()+', '+client.getNumber() + ', '+client.getUsername() +', '+ client.getRoles()}">
-
-</div>
-
-<form th:action="@{/api/v1/authenticated/client/edit/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">
-    <label for="username4">Username:</label>
-    <input type="text" id="username4" th:placeholder="${client.getUsername()}" name="username">
-    <br>
-    <label for="firstName4">First Name:</label>
-    <input type="text" id="firstName4" name="name" th:placeholder="${client.getName()}" >
-    <label for="number4">Number:</label>
-    <input type="text" id="number4" name="number" th:placeholder="${client.getNumber()}" >
-    <button type="submit">Edit Client</button>
-
-</form>
-<br>
-
-<div class="block" th:if="${!ecard.isEmpty()}">
-    <p th:text="'INN '+ ${ecard.get().getInn()}"></p>
-    <p th:text=" 'Date ' + ${ecard.get().getLocalDate()}"></p>
-    <p th:text=" 'Owner  ' + ${ecard.get().getClient().getName()}"></p>
-    <br>
-    <form th:action="@{/api/v1/card/delete/card/{id} (id = ${ecard.get().getId()})}"   method="POST">
-        <button type="submit">Delete card</button>
-    </form>
-
-</div>
-<br>
-<div class="block" th:unless="${!ecard.isEmpty()}">
-    No card yet!
-    <form th:action="@{/api/v1/card/add/card}"  enctype="multipart/form-data" method="POST">
-        <label for="username1">INN:</label>
-        <input type="number" id="name2" th:placeholder="${client.getUsername()}" name="inn">
-        <br>
-        <label for="firstName">Bank name:</label>
-        <input type="text" id="firstName5" name="bankName"  >
-        <label for="number">Date:</label>
-        <input type="date" id="number5" name="date" >
-        <button type="submit">Add card</button>
-
         <div class="div17">
             <div class="nav-header1">
                 <div class="component-11">
