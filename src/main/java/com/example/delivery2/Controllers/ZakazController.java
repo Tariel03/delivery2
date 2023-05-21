@@ -68,9 +68,4 @@ public class ZakazController {
         return "redirect:/api/v1/authenticated/zakaz/all";
 
     }
-
-
-
-
-
 }

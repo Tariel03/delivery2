@@ -28,8 +28,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void registration(UserDto userDto) {
-            passwordEncoder.encode(userDto.getPassword());
-         clientRepository.save(toEntity(userDto));
+        passwordEncoder.encode(userDto.getPassword());
+        clientRepository.save(toEntity(userDto));
     }
     @Override
     public void save(Client client){

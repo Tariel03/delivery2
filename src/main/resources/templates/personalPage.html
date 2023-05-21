@@ -1,16 +1,17 @@
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" type="text/css" media="all"
           href="/static/css/personal_area.css" th:href="@{/css/personal_area.css}" />
     <link rel="stylesheet" type="text/css" media="all"
           href="/static/css/personal_area.css" th:href="@{/css/card.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
+
+
         <div class="div17">
             <div class="nav-header1">
                 <div class="component-11">
@@ -101,6 +102,31 @@
                 </div>
             </div>
 
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <form th:action="@{/api/v1/authenticated/client/change/photo/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">
+                            <input type="file" id ="photo" accept=".png, .jpg, .jpeg" name = "image">
+                            <label for="photo"><i class="fa fa-pen-to-square"></i></label>
+                            <button type="submit" class="photoChange">Change photo</button>
+                        </form>
+
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="imagePreview">
+                            <img  class="photo" th:src="@{/{image}(image=${client.getPhoto()})}">
+                        </div>
+                    </div>
+                    <div th:each="request:${requests}" style="position: absolute;top: 210px;left: 17px;">
+                        <h2 th:text="${request.getRequestStatus()}">
+                        </h2>
+                    </div>
+
+                    <form th:action="@{/api/v1/authenticated/client/request/{client_id}(client_id=${client.getId()})}" method="POST">
+                        <button type="submit" class="requestChange">Request!</button>
+                    </form>
+
+                </div>
+
             <form th:action="@{/api/v1/authenticated/client/edit/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">
                 <div class="child5"></div>
                 <div class="child6 "></div>
@@ -123,9 +149,9 @@
                         alt=""
                         src="/images/mdicreditcardadd.svg"
                 />
+                <button class="services1 frame" type="submit">Сохранить изменения</button>
             </form>
             <div class="div33" id="mainDiv">Добавить новую карту</div>
-            <img class="group-icon" alt="" src="/images/group.svg" />
             <div class="div57" >
                 <div class="block" th:if="${!ecard.isEmpty()}">
                     <div class="backgound">
@@ -182,21 +208,13 @@
                             </div>
                         </div>
                     </div>
-                    <!--                            <p th:text="'INN '+ ${ecard.get().getInn()}"></p>-->
-                    <!--                            <p th:text=" 'Date ' + ${ecard.get().getLocalDate()}"></p>-->
-                    <!--                            <p th:text=" 'Owner  ' + ${ecard.get().getClient().getName()}"></p>-->
+
                 </div>
 
                 <div  th:unless="${!ecard.isEmpty()}" id="hiddenDiv" class="main">
-                    no card
                     <form th:action="@{/api/v1/card/add/card}"  enctype="multipart/form-data" method="POST">
                         <div class="pay">
-                            <div class="payment-methods">
-                                <label for="payment-type-credit-card" class="toggle-label">
-                                    <i class="fa fa-credit-card-alt"></i>
-                                </label>
 
-                            </div>
                             <button class="toggle-button" type="submit">Add card</button>
                             <input type="radio" class="toggle-checkbox" id="payment-type-credit-card" checked="checked" name="payment-methods">
 
@@ -213,7 +231,7 @@
                                         <input type="text" id="firstName2" name="bankName" class="name" placeholder="Bank Name">
                                         <div class="expiration">
                                             <h2>Expiration</h2>
-                                            <input type="date" style="color: white;font-size: x-large;" id="number2" name="date" >
+                                            <input type="date" style="color: white;font-size: 18px;" id="number2" name="date" >
                                         </div>
                                     </div>
                                     <div class="back">
@@ -226,21 +244,13 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </form>
-
-
                 </div>
 
-                <form th:action="@{/api/v1/authenticated/client/edit/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">
-                    <button class="services1 frame" type="submit">Сохранить изменения</button>
-                </form>
-
-
-
+<!--                <form th:action="@{/api/v1/authenticated/client/edit/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">-->
+<!--                    <button class="services1 frame" type="submit">Сохранить изменения</button>-->
+<!--                </form>-->
 
                 <div class="facebook-icon-group">
                     <img class="facebook-icon1" alt="" src="/images/facebook-icon.svg" />
@@ -250,32 +260,7 @@
                     <img class="twitter-icon1" alt="" src="/images/twitter-icon1.svg" />
                 </div>
             </div>
-
-
-
-            <img th:src="@{/{image}(image=${client.getPhoto()})}"  alt="no image" height="300px" width="300px">
-
-
-            <form th:action="@{/api/v1/authenticated/client/change/photo/{client_id}(client_id=${client.getId()})}"  enctype="multipart/form-data" method="POST">
-                <label for="photo">Image:</label>
-                <input type="file" id ="photo" name = "image">
-                <button type="submit">Change photo</button>
-            </form>
-
-
-            <div th:each="request:${requests}">
-                <h2 th:text="${request.getRequestStatus()}">
-
-                </h2>
-            </div>
-
-            <form th:action="@{/api/v1/authenticated/client/request/{client_id}(client_id=${client.getId()})}" method="POST">
-                <button type="submit">Request!</button>
-            </form>
-
         </div>
-
-    </form>
 </div>
 
             <script type="text/javascript" th:src="@{/js/carta.js}"></script>
