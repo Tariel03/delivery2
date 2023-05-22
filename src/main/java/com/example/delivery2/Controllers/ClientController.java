@@ -1,5 +1,6 @@
 package com.example.delivery2.Controllers;
 
+import com.example.delivery2.Enums.Bank;
 import com.example.delivery2.Enums.RequestStatus;
 import com.example.delivery2.Photos.PhotoConfig;
 import com.example.delivery2.Services.Impl.ClientServiceImpl;
@@ -30,13 +31,15 @@ public class ClientController {
         Client client = clientService.currentUser().get();
        Optional<Ecard> ecard = ecardService.findByClient(client);
         model.addAttribute("ecard", ecard);
+        model.addAttribute("banks", Bank.values());
         model.addAttribute("client", client);
-        model.addAttribute("requests",requestService.findByClient(client));
+//        model.addAttribute("requests",requestService.findByClient(client));
+        model.addAttribute("request", requestService.findRequest(client.getId()));
         return "personalPage";
     }
     @PostMapping("/client/edit/{client_id}")
-    String editMe(@PathVariable Long client_id, @RequestParam String username, @RequestParam String name, @RequestParam String number){
-        UpdateUserDto userDto = new UpdateUserDto(username,name,number);
+    String editMe(@PathVariable Long client_id, @RequestParam(required = false) String username, @RequestParam(required = false) String name, @RequestParam(required = false) String number){
+        UpdateUserDto userDto = new UpdateUserDto(name,username,number);
         clientService.edit(userDto, clientService.findById(client_id));
 
         return "redirect:/auth/login";
@@ -51,12 +54,7 @@ public class ClientController {
         clientService.save(client);
         return "redirect:/api/v1/authenticated/client";
     }
-    @PostMapping("/add/card")
-    String addCard(@RequestParam Long inn, @RequestParam  LocalDate localDate, @RequestParam String bankName){
-        Ecard ecard = new Ecard(inn,localDate,bankName);
-        ecard.setClient(clientService.currentUser().get());
-        return "personalPage";
-    }
+//
     @PostMapping("/client/request/{client_id}")
     String request(@PathVariable Long client_id){
         Request request = new Request();

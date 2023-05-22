@@ -20,6 +20,7 @@ public class Ecard {
     int balance;
     LocalDate localDate;
     String bankName;
+    int csv = (int) (Math.random() * 999);
     @ManyToOne
     @JoinColumn(name = "client_id")
     Client client;

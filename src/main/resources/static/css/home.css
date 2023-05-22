@@ -91,7 +91,7 @@ body {
 }
 .paper-plane-1 {
     position: absolute;
-    top: 180.94px;
+    top: 181px;
     left: 378px;
     width: 64px;
     height: 64px;
@@ -387,7 +387,7 @@ body {
     top: 1466px;
     left: 0;
     background-color: var(--red);
-    width: 1440px;
+    width: 100%;
     height: 277px;
 }
 .b8,

@@ -1,10 +1,7 @@
 package com.example.delivery2.repositories;
 
-import com.example.delivery2.Controllers.DeliverController;
 import com.example.delivery2.Enums.ZakazStatus;
-import com.example.delivery2.Projections.ZakazProjection;
 import com.example.delivery2.models.Client;
-import com.example.delivery2.models.Goods;
 import com.example.delivery2.models.Zakaz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

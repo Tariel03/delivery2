@@ -60,48 +60,50 @@
             src="/images/17372-converted-2@2x.png"
     />
 
+    <div th:each="zakaz:${zakazList}">
 
-    <div class="frame-parent4" th:each="zakaz:${zakazList}">
-        <div class="frame-parent5">
-            <div class="parent1">
-                <div class="div37">Корзина</div>
-                <div class="div38" th:text="${zakaz.getQuantity()+' продукт'}"></div>
-            </div>
-            <div class="frame-parent6">
-                <div class="kfc-group">
-                    <div class="kfc2" th:text="${zakaz.getZakazStatus()}"></div>
-                    <div class="frame-parent7">
-                        <div class="parent2" th:each="zakazGood : ${zakazGoodService.findByZakaz(zakaz)}">
-                            <div class="div37" th:text="${zakazGood.getGoods().getName()}">nothing</div>
-                            <div class="div40" th:text="${zakazGood.getGoods().getPrice()+'som'}">0</div>
+        <div class="frame-parent4">
+            <div class="frame-parent5">
+                <div class="parent1">
+                    <div class="div37">Корзина</div>
+                    <div class="div38" th:text="${zakaz.getQuantity()+' продукт'}"></div>
+                </div>
+                <div class="frame-parent6">
+                    <div class="kfc-group">
+                        <div class="kfc2" th:text="${zakaz.getZakazStatus()}"></div>
+                        <div class="frame-parent7">
+                            <div class="parent2" th:each="zakazGood : ${zakazGoodService.findByZakaz(zakaz)}">
+                                <div class="div37" th:text="${zakazGood.getGoods().getName()}">nothing</div>
+                                <div class="div40" th:text="${zakazGood.getGoods().getPrice()+'som'}">0</div>
+                            </div>
+                            <br>
                         </div>
-                        <br>
+                    </div>
+                    <div class="frame-wrapper1">
+                        <div class="frame-child2"></div>
                     </div>
                 </div>
-                <div class="frame-wrapper1">
-                    <div class="frame-child2"></div>
+            </div>
+            <div class="frame-parent9">
+                <div class="parent5">
+                    <div class="div37">Стоимость доставки</div>
+                    <div class="div37">65 с</div>
                 </div>
             </div>
-        </div>
-        <div class="frame-parent9">
-            <div class="parent5">
-                <div class="div37">Стоимость доставки</div>
-                <div class="div37">65 с</div>
+            <div class="parent7">
+                <div class="div37">Итого</div>
+                <div class="div37" th:text="${zakaz.getTotalPrice()}">280 с</div>
             </div>
-        </div>
-        <div class="parent7">
-            <div class="div37">Итого</div>
-            <div class="div37" th:text="${zakaz.getTotalPrice()}">280 с</div>
-        </div>
-        <div class="wrapper4">
-            <form action="#" th:action="@{/api/v1/authenticated/zakaz/dead/{id}(id=${zakaz.getId()})}" method="POST">
-                        <button type="submit" class="div37">Отменить!</button>
-            </form>
-        </div>
-        <div th:if="${zakaz.getDeliver() == null}">
-            <div>Not taken by deliver</div>
-        </div>
+            <div class="wrapper4">
+                <form action="#" th:action="@{/api/v1/authenticated/zakaz/dead/{id}(id=${zakaz.getId()})}" method="POST">
+                            <button type="submit" class="div37">Отменить!</button>
+                </form>
+            </div>
+            <div th:if="${zakaz.getDeliver() == null}">
+                <div>Not taken by deliver</div>
+            </div>
 
+        </div>
     </div>
     <div  th:each="zakaz:${zakazList}">
         <div class="profile" th:unless="${zakaz.getDeliver() == null}">

@@ -24,7 +24,6 @@ public class Client {
     private String username;
     private String password;
     private String name;
-    private boolean status;
     private String photo;
     private String number;
 
