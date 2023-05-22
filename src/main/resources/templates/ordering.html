@@ -302,17 +302,87 @@
 
 
 
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>BIN!</h1>
-<h4>Orders</h4>
+<h3>Requests</h3>
 
+<div th:each="request:${requests}">
+    <p th:text="${request.getClient().getName() + ', '+ request.getRequestStatus() + ', '+request.getLocalDate() + request.getLocalTime()}"></p>
+
+    <form th:action="@{/api/v1/admin/request/approve/{id}(id=${request.getId()})}" method="POST">
+        <button type="submit">Approve!</button>
+    </form>
+    <br>
+    <form th:action="@{/api/v1/admin/request/decline/{id}(id=${request.getId()})}" method="POST">
+        <button type="submit">Decline!</button>
+    </form>
+
+</div>
+
+
+
+
+<form th:action="@{/api/v1/admin/distributor/create}" enctype="multipart/form-data" method="POST">
+    <label for="firstName">Name:</label>
+    <input type="text" id="firstName" name="name" >
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address">
+    <label for="description">Description</label>
+    <textarea id="description" name="description"></textarea>
+    <label for="photo">Image:</label>
+    <input type="file" id ="photo" name = "image">
+    <button type="submit">Create distributor</button>
+</form>
+<br><br>
+
+<h3>Distributor</h3>
+<div th:each="distributor:${distributors}">
+    <div th:text="${distributor.getName() + ', ' + distributor.getAddress()}">
+    </div>
+    <p th:text="${distributor.getDescription()}"></p>
+    <img th:src="@{/{image}(image=${distributor.getPhoto()})}"  alt="no image"  height="10%" width="10%">
+    <br><br>
+    <h5>Goods</h5>
+    <div th:each="good :${goodsService.findByDistributor(distributor)}">
+        <div th:text= "${good.getName() + ', '+ good.getPrice() + '$'}">
+        </div>
+        <img th:src="@{/{image}(image=${good.getPhoto()})}" alt="no image" height="5%" width="5%">
+
+    </div>
+    <br>
+
+        <form th:action="@{/api/v1/admin/goods/create/{distributor_id} (distributor_id = ${distributor.getId()})}" enctype="multipart/form-data"  method="POST">
+            <label for="firstName1">Name:</label>
+            <input type="text" id="firstName1" name="name" >
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price">
+            <label for="description1">Description</label>
+            <textarea id="description1" name="description"></textarea>
+            <label for="photo1">Image:</label>
+            <input type="file" id ="photo1" name = "image">
+            <button type="submit">Create goods</button>
+        </form>
+
+</div>
+
+<h3>Statistics</h3>
+
+<div th:text="${'Number of delivers is  ' + deliver_number}">
+</div>
+<br>
+<div th:each="deliver:${delivers}">
+    <div th:text="${'Name is ' + deliver.getName() + ', username ' + deliver.getUsername() + ',number ' + deliver.getNumber()}">
+    </div>
+    <img th:src="@{/{image}(image=${deliver.getPhoto()})}"  alt="no image" height="10%" width="10%">
+
+    <br>
+    <div th:text="'This deliver has delievered '+ ${number_zakaz} + ' of orders' + '. And his salary is '+ ${salary} + '$'"></div>
+</div>
 
 </body>
 </html>
