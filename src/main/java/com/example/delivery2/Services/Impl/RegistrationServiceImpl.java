@@ -28,8 +28,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public void registration(UserDto userDto) {
-            passwordEncoder.encode(userDto.getPassword());
-         clientRepository.save(toEntity(userDto));
+        passwordEncoder.encode(userDto.getPassword());
+        clientRepository.save(toEntity(userDto));
     }
     @Override
     public void save(Client client){
@@ -37,7 +37,6 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new MainException("There is already person by this username");
         }
         client.setRoles(Roles.ROLE_USER);
-        client.setStatus(true);
         client.setPassword(passwordEncoder.encode(client.getPassword()));
         clientRepository.save(client);
 
@@ -48,11 +47,11 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new MainException("There is already person by this username");
         }
         client.setRoles(Roles.ROLE_ADMIN);
-        client.setStatus(true);
         client.setPassword(passwordEncoder.encode(client.getPassword()));
         clientRepository.save(client);
 
     }
+
 
     @Override
     public Client toEntity(UserDto userDto) {

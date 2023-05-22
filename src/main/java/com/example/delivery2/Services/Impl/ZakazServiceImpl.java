@@ -27,6 +27,12 @@ public class ZakazServiceImpl implements ZakazService {
         return zakazRepository.findAll();
     }
 
+
+    @Override
+    public List<Zakaz> findByClientAndZakazStatusNotLikeAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus, ZakazStatus zakazStatus1) {
+        return zakazRepository.findByClientAndZakazStatusNotLikeAndZakazStatusNotLike(client,ZakazStatus.Declined, ZakazStatus.Delivered);
+    }
+
     @Override
     public List<Zakaz> findByGoods(Goods goods) {
         return null;

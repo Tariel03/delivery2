@@ -22,10 +22,12 @@
     </div>
     <div class="navigation-bar">
         <div class="account" id="accountText">
-            <p class="p">Account</p>
+            <a th:href = "@{/api/v1/authenticated/client}" style = "text-underline: none" class="p">Account</a>
         </div>
         <div class="services-parent">
-            <div class="services">Services</div>
+            <div class="services">
+                <a style = "text-underline: none" th:href = "@{/api/v1/authenticated/zakaz/all}">Bin</a>
+            </div>
             <img
                     class="akar-iconschevron-down"
                     alt=""
@@ -33,7 +35,10 @@
             />
         </div>
         <div class="menu-parent">
-            <div class="services">Menu</div>
+            <div class="services"></div>
+            <a style = "text-underline: none" th:href="@{/api/v1/distributor/all}">
+                Menu
+            </a>
             <img
                     class="akar-iconschevron-down"
                     alt=""
@@ -45,7 +50,8 @@
         <div class="carbonlogin-parent">
             <img class="carbonlogin-icon" alt="" src="/images/carbonlogin.svg" />
 
-            <div class="login">Login</div>
+            <div class="login"><a style = "text-underline: none" th:href="@{/auth/login}">Login</a>
+            </div>
         </div>
     </div>
     <img class="icon" alt="" src="/images/5739256-1@2x.png" />
@@ -86,7 +92,7 @@
     <b class="b5">Мы рекомендуем</b>
     <img class="converted-2-icon" alt="" src="/images/17372-converted-2@2x.png">
     <figure class="kfc" th:each="distributor:${distributorList}">
-        <a  th:href="@{/api/v1/distributor/{id} (id = ${distributor.getId()})}">
+        <a style = "text-underline: none" th:href="@{/api/v1/distributor/{id} (id = ${distributor.getId()})}">
             <img class="item" th:src="@{/{image}(image=${distributor.getPhoto()})}" alt=""/>
             <figcaption class="ttt" th:text="${distributor.getName()}" ></figcaption>
         </a>

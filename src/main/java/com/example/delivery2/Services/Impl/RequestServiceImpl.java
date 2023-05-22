@@ -43,6 +43,16 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public Optional<Request> findRequest(Long client_id) {
+        return requestRepository.findRequest(client_id);
+    }
+
+    @Override
+    public List<Request> findDistinctByClientAndRequestStatus(Client client, RequestStatus requestStatus) {
+        return requestRepository.findDistinctByClientAndRequestStatus(client,requestStatus);
+    }
+
+    @Override
     public List<Request> findByRequestStatus(RequestStatus requestStatus) {
         return requestRepository.findByRequestStatus(RequestStatus.Considered);
     }

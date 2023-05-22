@@ -1,10 +1,7 @@
 package com.example.delivery2.repositories;
 
-import com.example.delivery2.Controllers.DeliverController;
 import com.example.delivery2.Enums.ZakazStatus;
-import com.example.delivery2.Projections.ZakazProjection;
 import com.example.delivery2.models.Client;
-import com.example.delivery2.models.Goods;
 import com.example.delivery2.models.Zakaz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +14,8 @@ public interface ZakazRepository extends JpaRepository<Zakaz, Long> {
     List<Zakaz>findByClient(Client client);
     List<Zakaz>findByZakazStatus(ZakazStatus zakazStatus);
     List<Zakaz>findByClientAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus);
+    List<Zakaz>findByClientAndZakazStatusNotLikeAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus,ZakazStatus zakazStatus1);
+
     List<Zakaz>findByZakazStatusAndDeliver(ZakazStatus zakazStatus, Client deliver);
 
     List<Zakaz>findByDeliver(Client deliver);

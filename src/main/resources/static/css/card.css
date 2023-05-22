@@ -60,8 +60,8 @@
     margin: 0 auto;
     position: relative;
     height: 30rem;
-    top: 397px;
-    left: 204px;
+    top: 486px;
+    left: 184px;
 }
 
 .payment-methods {
@@ -117,7 +117,7 @@
 }
 .payment-info.credit-card .toggle-label {
     position: absolute;
-    right: 25px;
+    right: 100px;
 
 }
 .payment-info.credit-card #card-flip:checked + .flip {
@@ -131,8 +131,8 @@
 .payment-info.credit-card .front, .payment-info.credit-card .back {
     padding: 1rem;
     background: linear-gradient(25deg, #011726, #045289);
-    height: 325px;
-    width: 500px;
+    height: 250px;
+    width: 400px;
     border-radius: 25px;
     backface-visibility: hidden;
     position: absolute;
@@ -143,9 +143,11 @@
 .payment-info.credit-card .front {
     z-index: 2;
     transform: rotateY(0deg);
+
 }
 .payment-info.credit-card .back {
     transform: rotateY(180deg);
+    left: 96px;
 }
 .payment-info.credit-card .symbol {
     position: absolute;
@@ -337,10 +339,11 @@ input:focus {
     padding: 0.5rem;
     border-radius: 3px;
     position: relative;
-    left: 385px;
-    top: 359px;
+    left: 300px;
+    top: 300px;
     color: white;
     width: 100px;
+    z-index: 100;
 }
 .show-div {
     cursor: pointer;

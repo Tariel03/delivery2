@@ -946,7 +946,7 @@ inputt[type=search]:focus {
 }
 
 .modal__btn {
-    background-color: red;
+    background-color: var(--red);
     color: #fff;
     font-size: 26px;
     text-align: center;
@@ -956,8 +956,8 @@ inputt[type=search]:focus {
     border: none;
     padding: 15px 30px;
     position: absolute;
-    top: 386px;
-    left: 105px;
+    top: 405px;
+    left: 157px;
 }
 
 .modal__close {
@@ -997,4 +997,14 @@ inputt[type=search]:focus {
     border: none;
     background: transparent;
     color: #f8f8f8;
+}
+.footer1 {
+    position: absolute;
+    top: 1600px;
+    left: 0;
+    background-color: var(--red);
+    width: 100%;
+    height: 20%;
+    font-size: var(--font-size-21xl);
+    color: var(--color-white);
 }
