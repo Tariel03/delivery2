@@ -27,10 +27,12 @@
     </div>
     <div class="navigation-bar1">
         <div class="account2" id="accountText">
-            <p class="account3">Account</p>
+            <a class="account3" th:href = "@{/api/v1/authenticated/client}">Account</a>
         </div>
         <div class="services-group">
-            <div class="services1">Services</div>
+            <div class="services1">
+                <a th:href="@{/api/v1/autehenticated/zakaz/all}">Bin</a>
+            </div>
             <img
                     class="akar-iconschevron-down2"
                     alt=""
@@ -38,7 +40,9 @@
             />
         </div>
         <div class="menu-group">
-            <div class="services1">Menu</div>
+            <div class="services1"><a th:href="@{/api/v1/distributor/all}">
+                Menu
+            </a></div>
             <img
                     class="akar-iconschevron-down2"
                     alt=""
@@ -54,7 +58,8 @@
                     src="/images/carbonlogin.svg"
             />
 
-            <div class="login1">Login</div>
+            <div class="login1"><a style = "text-underline: none" th:href="@{/auth/login}">Login</a>
+            </div>
         </div>
     </div>
     <img
@@ -219,8 +224,7 @@
 
     <div class="footer1">
         <div class="delivery3">Delivery</div>
-        <img class="converted-2-icon3" alt="" src="/images/17372-converted-2@2x.pn">
-/public/17372-converted-2@2x.png
+        <img class="converted-2-icon3" alt="" src="/images/17372-converted-2@2x.png">
         <div class="group">
             <div class="c">О нас</div>
             <div class="c">Доставка</div>

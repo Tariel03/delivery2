@@ -23,10 +23,12 @@
     </div>
     <div class="navigation-bar2">
         <div class="account4">
-            <p class="account5">Account</p>
+            <a  th:href = "@{/api/v1/authenticated/client}" class="account5">Account</a>
         </div>
         <div class="services-container">
-            <div class="services2">Services</div>
+            <div class="services2">
+                <a th:href="@{/api/v1/autehenticated/zakaz/all}">Bin</a>
+            </div>
             <img
                     class="akar-iconschevron-down6"
                     alt=""
@@ -34,7 +36,9 @@
             />
         </div>
         <div class="menu-container">
-            <div class="services2">Menu</div>
+            <div class="services2">
+                <a th:href="@{/api/v1/distributor/all}">Menu</a>
+            </div>
             <img
                     class="akar-iconschevron-down6"
                     alt=""
@@ -51,7 +55,8 @@
                     src="/images/carbonlogin.svg"
             />
 
-            <div class="login2">Login</div>
+            <div class="login2">
+                <a style = "text-underline: none" th:href="@{/auth/login}">Login</a></div>
         </div>
     </div>
     <img
