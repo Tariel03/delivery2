@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface ZakazService {
     List<Zakaz> findAll();
+    List<Zakaz>findByClientAndZakazStatusNotLikeAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus,ZakazStatus zakazStatus1);
+
     List<Zakaz>findByGoods(Goods goods);
     Zakaz findById(Long id) throws Exception;
     Zakaz save(Zakaz zakaz);

@@ -13,6 +13,8 @@ public interface RequestService {
     List<Request>findByClient(Client client);
     void save(Request request);
     Optional<Request> findRequest(Long client_id);
+    List<Request>findDistinctByClientAndRequestStatus(Client client, RequestStatus requestStatus);
+
     List<Request>findByRequestStatus(RequestStatus requestStatus);
 
 }

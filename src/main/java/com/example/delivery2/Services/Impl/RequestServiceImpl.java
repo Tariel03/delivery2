@@ -48,6 +48,11 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    public List<Request> findDistinctByClientAndRequestStatus(Client client, RequestStatus requestStatus) {
+        return requestRepository.findDistinctByClientAndRequestStatus(client,requestStatus);
+    }
+
+    @Override
     public List<Request> findByRequestStatus(RequestStatus requestStatus) {
         return requestRepository.findByRequestStatus(RequestStatus.Considered);
     }

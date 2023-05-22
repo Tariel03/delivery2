@@ -14,6 +14,8 @@ public interface ZakazRepository extends JpaRepository<Zakaz, Long> {
     List<Zakaz>findByClient(Client client);
     List<Zakaz>findByZakazStatus(ZakazStatus zakazStatus);
     List<Zakaz>findByClientAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus);
+    List<Zakaz>findByClientAndZakazStatusNotLikeAndZakazStatusNotLike(Client client, ZakazStatus zakazStatus,ZakazStatus zakazStatus1);
+
     List<Zakaz>findByZakazStatusAndDeliver(ZakazStatus zakazStatus, Client deliver);
 
     List<Zakaz>findByDeliver(Client deliver);

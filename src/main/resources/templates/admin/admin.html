@@ -129,7 +129,7 @@
             <!--        Add destributor-->
             <div class="add_destributor">
 
-                <p class="title_text">Add destributor</p>
+                <p class="title_text">Add distributor</p>
                 <form th:action="@{/api/v1/admin/distributor/create}" enctype="multipart/form-data" method="POST">
                     <div class="row mb-3">
                         <div class="col">
@@ -179,17 +179,16 @@
                         </button>
                         <br>
                         <br>
-                        <div class="goods">
-                            <div class="info" th:each="good :${goodsService.findByDistributor(distributor)}">
-                                <img th:src="@{/{image}(image=${good.getPhoto()})}" style="width: 20%" alt="No photo">
-                                <p class="destributor_name" th:text="${good.getName()}"></p>
-                                <p class="good-price" th:text="${good.getPrice() + '$'}"></p>
-                                <p class="good_desc" th:text="${good.getDescription}"></p>
-                            </div>
-                        </div>
 
                     </form>
-
+                    <div class="goods">
+                        <div class="info" style="margin-left: 3%" th:each="good :${goodsService.findByDistributor(distributor)}">
+                            <img th:src="@{/{image}(image=${good.getPhoto()})}" style="width: 20%" alt="No photo">
+                            <p class="destributor_name" th:text="${good.getName()}"></p>
+                            <p class="good-price" th:text="${good.getPrice() + ' сом '}"></p>
+                            <p class="good_desc" th:text="${good.getDescription}"></p>
+                        </div>
+                    </div>
                 </div>
 
 

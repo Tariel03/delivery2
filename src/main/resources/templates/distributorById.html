@@ -85,7 +85,7 @@
 
                     </div>
                 </div>
-                <div class="div6" th:text = "${distributor.getQuantity()+' раз мы были рассмотрены'}">
+                <div class="div6" th:text = "${total +' *****' + ', '+ distributor.getPoint().size() + ' людей проголосовали!'}">
                 </div>
                 <form style="margin-left: 55px" th:action="@{/api/v1/distributor/review/{id}(id=${distributor.getId()})}" method="POST">
                     <input class="ball" type="number" id="review" name="review" placeholder="0-10" >
@@ -120,6 +120,7 @@
             <img class="frame-item" th:src="@{/{image}(image=${good.getPhoto()})}" alt="no image"/>
 
             <div class="div8" th:text="${good.getName()}">Шеф бургер</div>
+            <div  th:text="${good.getDescription()}">11</div>
             <div class="material-symbolsadd-circle-ou"></div>
             <div class="frame-parent1">
                 <div class="vector-group">
@@ -163,10 +164,6 @@
     <div class="div16">Гарниры</div>
     <b class="b10">Самое популярное</b>
     <div class="container">
-        <form class="form1" th:action="@{/api/v1/goods/search/{distributor_id} (distributor_id = ${distributor.getId()})}" method="post">
-            <input class="inputt" type="search" placeholder="Search...">
-            <button class="buttonn" type="submit">Search</button>
-        </form>
     </div>
 
     <div id="icon" onclick="toggleDiv()"><span id="ico" class="first-icon"></span></div>
@@ -177,13 +174,13 @@
             <br>
             <br>
             <div th:each="zakazGood : ${zakazGoods}">
-                <div style="font-size: 20px" th:text="${zakazGood.getGoods().getName()}">nothing</div>
+                <div style="font-size: 20px" th:text="${zakazGood.getGoods().getName() +', price is'+ zakazGood.getGoods().getPrice() + ' som '}">nothing</div>
                 <br>
             </div>
         </div>
         <button class="wrapper section__button section__button1">Make zakaz</button>
     </div>
-    <form action="#" th:action="@{/api/v1/authenticated/zakaz/make/{distributor_id}(distributor_id = ${distributor.getId()})}" method="POST">
+    <form action="#" th:object="${zakazDto}" th:action="@{/api/v1/authenticated/zakaz/make/{distributor_id}(distributor_id = ${distributor.getId()})}" method="POST">
         <div class="modal modal1">
             <div class="modal__main">
                 <div class="vector-parent4">
@@ -195,7 +192,7 @@
                     <div class="vector-parent5">
                         <img class="vector-icon16" alt="" src="/images/vector11.svg" />
                         <div class="div55">
-                            <input style="color: #212529;background: transparent;border: none;" type="text" id="address3" name="address" placeholder="Enter your address" ></div>
+                            <input style="color: #212529;background: transparent;border: none;" type="text" id="address3"  th:field="*{address}" name="address" placeholder="Enter your address" ></div>
                     </div>
                     <b class="b6">Способ оплаты</b>
                     <img
@@ -205,10 +202,12 @@
                     />
                     <div class="child11"></div>
                     <div class="div57">
-                        <select class="paym"  th:field="*{payments}" >
-                            <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}">
-                            </option>
-                        </select>
+                        <label>
+                            <select class="paym"  th:field="*{payment}" >
+                                <option th:each="payment : ${payments}" th:value="${payment}" th:text="${payment}">
+                                </option>
+                            </select>
+                        </label>
                     </div>
                 </div>
                 <button class="modal__btn" type="submit">Заказать</button>
