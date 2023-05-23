@@ -72,27 +72,27 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <!--               Delivery list-->
                 <p class="title_text">Delivery list</p>
-                    <div>
-                        <div class="list mb-5" th:each="zakaz:${zakazList}">
-                            <div class="">
-                                <p class="name">Address: <span th:text="${zakaz.getAddress()}"></span></p>
-                                <p class="price">Quantity: <span th:text="${zakaz.getQuantity()}"></span></p>
-                                <p class="price">Date: <span th:text="${zakaz.getDate()}"></span></p>
-                                <p class="price">Total price: <span th:text="${zakaz.getTotalPrice()}"></span> сом</p>
-                                <p class="price">Delivery price: <span th:text="${zakaz.getDeliveryPrice()}"></span> сом</p>
-                                <p class="price">Payment way is: <span th:text="${zakaz.getPayment()}"></span></p>
-                                <p class="price">Restaraunt address is: <span th:text="${zakaz.getAddress()}"></span></p>
-                            </div>
-                            <h4>Goods:</h4>
-                            <div class="" th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">
-                                <p class="name">Name: <span th:text="${zakazgood.getGoods().getName()}"></span></p>
-                                <p class="price">Price: <span th:text="${zakazgood.getGoods().getPrice()}"></span>сом</p>
-                            </div>
-                            <form th:action="@{/api/v1/authenticated/deliver/take/zakaz/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
-                            <button type="submit" class="logout-btn">Approve!</button>
-                             </form>
+                <div>
+                    <div class="list mb-5" th:each="zakaz:${zakazList}">
+                        <div class="">
+                            <p class="name">Address: <span th:text="${zakaz.getAddress()}"></span></p>
+                            <p class="price">Quantity: <span th:text="${zakaz.getQuantity()}"></span></p>
+                            <p class="price">Date: <span th:text="${zakaz.getDate()}"></span></p>
+                            <p class="price">Total price: <span th:text="${zakaz.getTotalPrice()}"></span> сом</p>
+                            <p class="price">Delivery price: <span th:text="${zakaz.getDeliveryPrice()}"></span> сом</p>
+                            <p class="price">Payment way is: <span th:text="${zakaz.getPayment()}"></span></p>
+                            <p class="price">Restaraunt address is: <span th:text="${zakaz.getAddress()}"></span></p>
                         </div>
+                        <h4>Goods:</h4>
+                        <div class="" th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">
+                            <p class="name">Name: <span th:text="${zakazgood.getGoods().getName()}"></span></p>
+                            <p class="price">Price: <span th:text="${zakazgood.getGoods().getPrice()}"></span>сом</p>
+                        </div>
+                        <form th:action="@{/api/v1/authenticated/deliver/take/zakaz/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
+                            <button type="submit" class="logout-btn">Approve!</button>
+                        </form>
                     </div>
+                </div>
                 <!--               Delivery list end-->
 
 
@@ -120,12 +120,12 @@
                         </div>
 
 
-                            <form th:action="@{/api/v1/authenticated/deliver/deliver/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
-                                <button type="submit" class="bg-success logout-btn">Deliver!</button>
-                            </form>
-                            <form th:action="@{/api/v1/authenticated/deliver/decline/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
-                                <button type="submit" class="logout-btn bg-danger">Reject!</button>
-                            </form>
+                        <form th:action="@{/api/v1/authenticated/deliver/deliver/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
+                            <button type="submit" class="bg-success logout-btn">Deliver!</button>
+                        </form>
+                        <form th:action="@{/api/v1/authenticated/deliver/decline/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
+                            <button type="submit" class="logout-btn bg-danger">Reject!</button>
+                        </form>
 
                     </div>
 
