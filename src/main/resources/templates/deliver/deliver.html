@@ -1,69 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div th:each="zakaz:${zakazList}">-->
-<!--    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment()}">-->
-<!--        <br>-->
-
-<!--    </h5>-->
-<!--    <div th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">-->
-<!--        <div th:text="${'Name '+ zakazgood.getGoods().getName() +',Price ' + zakazgood.getGoods().getPrice() }">-->
-
-<!--        </div>-->
-
-<!--    </div>-->
-<!--    <br>-->
-<!--    <form th:action="@{/api/v1/authenticated/deliver/take/zakaz/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">-->
-<!--        <button type="submit">Approve!</button>-->
-
-<!--    </form>-->
-<!--</div>-->
-<!--<br><br>-->
-<!--<h3>My orders!</h3>-->
-<!--<div th:each="zakaz:${myZakazlist}" style="font-size: medium">-->
-<!--    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment() + ',  Status '+ zakaz.getZakazStatus()}">-->
-<!--    </h5>-->
-<!--    <div th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">-->
-<!--        <div th:text="${zakazgood.getGoods().getId()+ ', Name '+ zakazgood.getGoods().getName() +',Price ' + zakazgood.getGoods().getPrice() + ', ' + zakazGoodService.countByGoodsAndZakaz(zakazgood.getGoods(),zakaz  )  + 'X'}">-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <form th:action="@{/api/v1/authenticated/deliver/decline/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">-->
-<!--        <button type="submit">Reject!</button>-->
-<!--    </form>-->
-
-<!--    <form th:action="@{/api/v1/authenticated/deliver/deliver/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">-->
-<!--        <button type="submit">Deliver!</button>-->
-<!--    </form>-->
-
-
-
-
-<!--</div>-->
-
-
-
-<!--<h3>My info </h3>-->
-<!--<div th:text="${client.getName() +', '+ client.getUsername() + ', '+ client.getRoles()}">-->
-<!--</div>-->
-<!--<br><br>-->
-<!--<h5 th:text="${salary} + ' $'"></h5>-->
-
-<!--<h4>Delivered</h4>-->
-
-<!--<div th:each="zakaz:${zakazList1}">-->
-<!--    <h5 th:text="${'Address ' + zakaz.getAddress() +', Quantity' +  zakaz.getQuantity() +', Date ' + zakaz.getDate() +', Total price ' + zakaz.getTotalPrice() +', Delivery price ' + zakaz.getDeliveryPrice() + ',Payment way is  ' +zakaz.getPayment() + ',  Status '+ zakaz.getZakazStatus()}">-->
-<!--    </h5>-->
-<!--</div>-->
-
-
-<!--</body>-->
-<!--</html>-->
-
 
 
 <!doctype html>
@@ -88,7 +22,6 @@
 
 <header>
 
-
     <nav class="navbar navbar-expand-lg navbar-light bg-white" id="mainNav">
         <div class="container">
             <div class="brand">
@@ -103,46 +36,29 @@
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-black" href="#" id="ServiceDropdown" role="button"
+                            <a class="nav-link dropdown-toggle text-black" th:href="@{/api/v1/}" id="ServiceDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Services
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="ServiceDropdown">
-                                <li><a class="dropdown-item" href="#">1</a></li>
-                                <li><a class="dropdown-item" href="#">2</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">3</a></li>
-                            </ul>
+
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-black" href="#" id="MenuDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-black" th:href="@{/api/v1/distributor/all}" id="MenuDropdown" >
                                 Menu
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="MenuDropdown">
-                                <li><a class="dropdown-item" href="#">A</a></li>
-                                <li><a class="dropdown-item" href="#">B</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">C</a></li>
-                            </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link text-black" href="#">Account</a></li>
                     </ul>
                 </div>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-                    <button class="logout-btn" type="submit"><i class="bi bi-box-arrow-in-right me-2"></i>Logout
-                    </button>
+                    <a th:href="@{/auth/login}" class="logout-btn" type="submit"><i class="bi bi-box-arrow-in-right me-2"></i>Logout
+                    </a>
                 </form>
 
             </div>
         </div>
     </nav>
-
 </header>
 
 
@@ -156,31 +72,27 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <!--               Delivery list-->
                 <p class="title_text">Delivery list</p>
-                <form action="">
-                    <div>
-                        <div class="list mb-5" th:each="zakaz:${zakazList}">
-                            <div class="">
-                                <p class="name">Address: <span th:text="${zakaz.getAddress()}"></span></p>
-                                <p class="price">Quantity: <span th:text="${zakaz.getQuantity()}"></span></p>
-                                <p class="price">Date: <span th:text="${zakaz.getDate()}"></span></p>
-                                <p class="price">Total price: <span th:text="${zakaz.getTotalPrice()}"></span>$</p>
-                                <p class="price">Delivery price: <span th:text="${zakaz.getDeliveryPrice()}"></span>$</p>
-                                <p class="price">Payment way is: <span th:text="${zakaz.getPayment()}"></span></p>
-                                <p class="price">Restaraunt address is: <span th:text="${zakaz.getAddress()}"></span></p>
-                            </div>
-                            <h4>Goods:</h4>
-                            <div class="" th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">
-                                <p class="name">Name: <span th:text="${zakazgood.getGoods().getName()}"></span></p>
-                                <p class="price">Price: <span th:text="${zakazgood.getGoods().getPrice()}"></span>$</p>
-                            </div>
-                            <form th:action="@{/api/v1/authenticated/deliver/take/zakaz/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
-                            <button type="submit" class="logout-btn">Approve!</button>
-                             </form>
+                <div>
+                    <div class="list mb-5" th:each="zakaz:${zakazList}">
+                        <div class="">
+                            <p class="name">Address: <span th:text="${zakaz.getAddress()}"></span></p>
+                            <p class="price">Quantity: <span th:text="${zakaz.getQuantity()}"></span></p>
+                            <p class="price">Date: <span th:text="${zakaz.getDate()}"></span></p>
+                            <p class="price">Total price: <span th:text="${zakaz.getTotalPrice()}"></span> сом</p>
+                            <p class="price">Delivery price: <span th:text="${zakaz.getDeliveryPrice()}"></span> сом</p>
+                            <p class="price">Payment way is: <span th:text="${zakaz.getPayment()}"></span></p>
+                            <p class="price">Restaraunt address is: <span th:text="${zakaz.getAddress()}"></span></p>
                         </div>
-
-
+                        <h4>Goods:</h4>
+                        <div class="" th:each="zakazgood:${zakazGoodService.findByZakaz(zakaz)}">
+                            <p class="name">Name: <span th:text="${zakazgood.getGoods().getName()}"></span></p>
+                            <p class="price">Price: <span th:text="${zakazgood.getGoods().getPrice()}"></span>сом</p>
+                        </div>
+                        <form th:action="@{/api/v1/authenticated/deliver/take/zakaz/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
+                            <button type="submit" class="logout-btn">Approve!</button>
+                        </form>
                     </div>
-                </form>
+                </div>
                 <!--               Delivery list end-->
 
 
@@ -206,9 +118,7 @@
                             <p class="name">Price: <span th:text="${zakazgood.getGoods().getPrice()}"></span></p>
                             <p class="price">Count: <span th:text="${ zakazGoodService.countByGoodsAndZakaz(zakazgood.getGoods(),zakaz)}"></span></p>
                         </div>
-                    </div>
 
-                    <div class="d-flex justify-content-around" th:each="zakaz:${myZakazlist}">
 
                         <form th:action="@{/api/v1/authenticated/deliver/deliver/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
                             <button type="submit" class="bg-success logout-btn">Deliver!</button>
@@ -216,7 +126,10 @@
                         <form th:action="@{/api/v1/authenticated/deliver/decline/{zakaz_id}(zakaz_id=${zakaz.getId()})}" method="POST">
                             <button type="submit" class="logout-btn bg-danger">Reject!</button>
                         </form>
+
                     </div>
+
+
                 </div>
                 <!--               My orders end-->
 
