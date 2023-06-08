@@ -35,7 +35,7 @@ The project aims to streamline the delivery process, enhance customer satisfacti
 
 ## Tech Stack
 
-**Backend:**  Spring boot, Java, Spring Security, Spring Dat Jpa, Lombok,Spring Web, PostgreSQL, Maven
+**Backend:**  Spring boot, Java, Spring Security, Spring Data Jpa, Lombok,Spring Web, PostgreSQL, Maven
 
 **Frontend:** Html, CSS, Thymeleaf, Bootstrap, JS
 
